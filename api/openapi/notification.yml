@@ -1,0 +1,55 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Jerens Web App
+  description: TODO
+  contact:
+    name: Jerens Lensun
+    url: https://www.jerenslensun.com/
+servers:
+  - url: https://{hostname}/api
+    variables:
+      hostname:
+        default: localhost
+paths:
+
+  /notification/subscribe:
+    post:
+      summary: Subscribe to notification
+      operationId: subscribe
+      requestBody:
+        description: Register new Token to a server
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSubscriber'
+      responses:
+        '201':
+          description: todo
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    NewSubscriber:
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: Client Token
+    Error:
+      type: object
+      required:
+        - slug
+        - message
+      properties:
+        slug:
+          type: string
+        message:
+          type: string
