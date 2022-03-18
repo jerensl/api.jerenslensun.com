@@ -18,10 +18,10 @@ func RunHTTPServer(createHandler func(router chi.Router) http.Handler) {
 }
 
 func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http.Handler) {
+	rootRouter := chi.NewRouter()
+	
 	apiRouter := chi.NewRouter()
 	setMiddlewares(apiRouter)
-
-	rootRouter := chi.NewRouter()
 
 	rootRouter.Mount("/api", createHandler(apiRouter))
 
