@@ -8,6 +8,9 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+	"github.com/sirupsen/logrus"
+
+	"github.com/jerensl/jerens-web-api/internal/logs"
 )
 
 func RunHTTPServer(createHandler func(router chi.Router) http.Handler) {
@@ -22,12 +25,15 @@ func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http
 
 	rootRouter.Mount("/api", createHandler(apiRouter))
 
+	logrus.Info("Starting RESTFull Api server")
+
 	http.ListenAndServe(addr, rootRouter)
 }
 
 func setMiddlewares(router *chi.Mux)  {
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
+	router.Use(logs.NewStructuredLogger(logrus.StandardLogger()))
 	router.Use(middleware.Recoverer)
 
 	addCorsMiddleware(router)
@@ -44,7 +50,6 @@ func addCorsMiddleware(router *chi.Mux) {
 	if len(allowedOrigins) == 0 {
 		return
 	}
-	
 
 	corsMiddleware := cors.New(cors.Options{
 		AllowedOrigins:   allowedOrigins,
