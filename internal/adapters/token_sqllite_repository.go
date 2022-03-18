@@ -10,16 +10,16 @@ import (
 )
 
 func NewSQLiteConnection() (*sqlx.DB, error) {
-	db, err := sqlx.Open("sqlite3", "../../database/sqlite.db")
+	db, err := sqlx.Open("sqlite3", "../database/sqlite.db")
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
 
-	// schema := `CREATE TABLE token (
-	// 	token text NOT NULL PRIMARY KEY
-	// );`
+	schema := `CREATE TABLE IF NOT EXISTS token (
+		token text NOT NULL PRIMARY KEY
+	);`
 
-	// _, err = db.Exec(schema)
+	_, err = db.Exec(schema)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
@@ -45,7 +45,10 @@ func (s SQLiteTokenRepository) UpdatedToken(ctx context.Context, token string) e
 func (s SQLiteTokenRepository) updatedToken(ctx context.Context, token string) error {
 	insert := `INSERT INTO token (token) VALUES (?)`
 
-	s.db.MustExec(insert, "abc123")
+	_, err := s.db.Exec(insert, token)
+	if err != nil {
+		return errors.Wrap(err, "Unable to insert token to database")
+	}
 	
 	return nil
 }
@@ -57,7 +60,6 @@ func (s SQLiteTokenRepository) GetToken(ctx context.Context, value string) (hasV
 	err = row.Scan(&values)
 	if err != nil {
 		return false, err
-	}
-	
+	}	
 	return values > 0, nil
 }

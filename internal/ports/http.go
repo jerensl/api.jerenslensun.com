@@ -1,11 +1,12 @@
 package ports
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/jerensl/jerens-web-api/internal/app"
+	"github.com/jerensl/jerens-web-api/internal/logs/httperr"
 )
 
 type HttpServer struct {
@@ -24,6 +25,13 @@ func (h HttpServer) Subscribe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(newSubscriber)
+	ctx := context.Background()
+
+	err := h.app.Commands.AddNewSubscriber.Handle(ctx, newSubscriber.Token)
+	if err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
 	w.WriteHeader(http.StatusCreated)
 }

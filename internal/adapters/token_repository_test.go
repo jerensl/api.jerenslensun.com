@@ -20,7 +20,6 @@ func TestRepository(t *testing.T) {
 	r := newSqlLiteRepository(t)
 
 	t.Run("Test update token", func(t *testing.T) {
-		t.Skip()
 		testUpdatedToken(t, r)
 	})
 
