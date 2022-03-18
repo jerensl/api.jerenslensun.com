@@ -10,7 +10,7 @@ import (
 )
 
 func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
-	db, err := adapters.NewSQLiteConnection()
+	db, err := adapters.NewSQLiteConnection("../../database/sqlite.db")
 	require.NoError(t, err)
 
 	return adapters.NewSQLiteTokenRepository(db)
@@ -26,11 +26,17 @@ func TestRepository(t *testing.T) {
 	t.Run("Test update token", func(t *testing.T) {
 		testGetToken(t, r)
 	})
+
+	t.Run("Test update token", func(t *testing.T) {
+		testGetAllToken(t, r)
+	})
 }
 
 func testUpdatedToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	ctx := context.Background()
 	err := repository.UpdatedToken(ctx, "abc123")
+	require.NoError(t, err)
+	err = repository.UpdatedToken(ctx, "abc321")
 	require.NoError(t, err)
 }
 
@@ -41,4 +47,14 @@ func testGetToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	require.NoError(t, err)
 
 	assert.True(t, hasValue)
+}
+
+func testGetAllToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	ctx := context.Background()
+	expected := []string{"abc123", "abc321"}
+
+	subscriber, err := repository.GetAllToken(ctx)
+	require.NoError(t, err)
+
+	assert.Equal(t, expected,subscriber)
 }

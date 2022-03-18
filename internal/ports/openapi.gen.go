@@ -12,9 +12,12 @@ import (
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
+	// Send notification to all subscriber
+	// (POST /notification/send)
+	SendNotification(w http.ResponseWriter, r *http.Request)
 	// Subscribe to notification
 	// (POST /notification/subscribe)
-	Subscribe(w http.ResponseWriter, r *http.Request)
+	SubscribeNotification(w http.ResponseWriter, r *http.Request)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -26,12 +29,27 @@ type ServerInterfaceWrapper struct {
 
 type MiddlewareFunc func(http.HandlerFunc) http.HandlerFunc
 
-// Subscribe operation middleware
-func (siw *ServerInterfaceWrapper) Subscribe(w http.ResponseWriter, r *http.Request) {
+// SendNotification operation middleware
+func (siw *ServerInterfaceWrapper) SendNotification(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.Subscribe(w, r)
+		siw.Handler.SendNotification(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// SubscribeNotification operation middleware
+func (siw *ServerInterfaceWrapper) SubscribeNotification(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.SubscribeNotification(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -155,7 +173,10 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 	}
 
 	r.Group(func(r chi.Router) {
-		r.Post(options.BaseURL+"/notification/subscribe", wrapper.Subscribe)
+		r.Post(options.BaseURL+"/notification/send", wrapper.SendNotification)
+	})
+	r.Group(func(r chi.Router) {
+		r.Post(options.BaseURL+"/notification/subscribe", wrapper.SubscribeNotification)
 	})
 
 	return r

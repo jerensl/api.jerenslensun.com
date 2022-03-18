@@ -9,8 +9,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func NewSQLiteConnection() (*sqlx.DB, error) {
-	db, err := sqlx.Open("sqlite3", "../database/sqlite.db")
+func NewSQLiteConnection(file string) (*sqlx.DB, error) {
+	db, err := sqlx.Open("sqlite3", file)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
@@ -62,4 +62,13 @@ func (s SQLiteTokenRepository) GetToken(ctx context.Context, value string) (hasV
 		return false, err
 	}	
 	return values > 0, nil
+}
+
+func (s SQLiteTokenRepository) GetAllToken(ctx context.Context) (subscriber []string, err error) {
+	err = s.db.Select(&subscriber,"SELECT token FROM token")
+	if err != nil {
+		return nil, err
+	}	
+
+	return subscriber, nil
 }

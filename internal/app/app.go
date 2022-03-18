@@ -12,8 +12,10 @@ type Application struct {
 
 type Commands struct {
 	AddNewSubscriber command.AddNewSubscriberHandler
+	SendNotification command.SendNotificationHandler
 }
 
 type Queries struct {
 	CheckIfTokenExist query.CheckTokenHandler
+	GetAllSubscriber query.GetAllSubscriberHandler
 }

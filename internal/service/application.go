@@ -10,20 +10,29 @@ import (
 )
 
 func NewApplication(ctx context.Context) app.Application {
-	db, err := adapters.NewSQLiteConnection()
+	db, err := adapters.NewSQLiteConnection("../database/sqlite.db")
 	if err != nil {
 		panic(err)
 	}
 
-
 	tokenRepository := adapters.NewSQLiteTokenRepository(db)
+	messageClient, err := adapters.NewFirebaseMessagingConnection()
+	if err != nil {
+		panic(err)
+	}
+
+	messaging := adapters.Messaging{
+		MessagingClient: messageClient,
+	}
 
 	return app.Application{
 		Commands: app.Commands{
 			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository),
+			SendNotification: command.NewSendNotificationHandler(&messaging),
 		},
 		Queries: app.Queries{
 			CheckIfTokenExist: query.NewCheckTokenHandler(tokenRepository),
+			GetAllSubscriber: query.NewGetAllSubscriberHandler(tokenRepository),
 		},
 	}
 }
