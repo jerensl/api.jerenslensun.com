@@ -10,7 +10,7 @@ import (
 )
 
 func NewApplication(ctx context.Context) app.Application {
-	db, err := adapters.NewSQLiteConnection("../database/sqlite.db")
+	db, err := adapters.NewSQLiteConnection()
 	if err != nil {
 		panic(err)
 	}

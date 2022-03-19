@@ -10,7 +10,7 @@ import (
 )
 
 func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
-	db, err := adapters.NewSQLiteConnection("../../database/sqlite.db")
+	db, err := adapters.NewSQLiteConnection()
 	require.NoError(t, err)
 
 	return adapters.NewSQLiteTokenRepository(db)

@@ -2,6 +2,7 @@ package adapters
 
 import (
 	"context"
+	"os"
 
 	"github.com/pkg/errors"
 
@@ -9,8 +10,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func NewSQLiteConnection(file string) (*sqlx.DB, error) {
-	db, err := sqlx.Open("sqlite3", file)
+func NewSQLiteConnection() (*sqlx.DB, error) {
+	db, err := sqlx.Connect("sqlite3", os.Getenv("SQLITE_DB"))
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
