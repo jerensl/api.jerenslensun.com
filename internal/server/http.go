@@ -14,7 +14,7 @@ import (
 )
 
 func RunHTTPServer(createHandler func(router chi.Router) http.Handler) {
-	RunHTTPServerOnAddr(":"+os.Getenv("PORT_DEV"), createHandler)
+	RunHTTPServerOnAddr(":"+os.Getenv("PORT"), createHandler)
 }
 
 func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http.Handler) {
@@ -25,7 +25,7 @@ func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http
 
 	rootRouter.Mount("/api", createHandler(apiRouter))
 
-	logrus.Info("Starting RESTFull Api server")
+	logrus.Info("Starting RESTFull Api server on Port "+os.Getenv("PORT"))
 
 	http.ListenAndServe(addr, rootRouter)
 }

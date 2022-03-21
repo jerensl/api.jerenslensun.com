@@ -11,7 +11,7 @@ import (
 )
 
 func NewSQLiteConnection() (*sqlx.DB, error) {
-	db, err := sqlx.Connect("sqlite3", os.Getenv("SQLITE_DB"))
+	db, err := sqlx.Connect("sqlite3", os.Getenv("SQLITE_DB_TEST"))
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}

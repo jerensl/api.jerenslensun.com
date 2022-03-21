@@ -52,7 +52,7 @@ func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	h.app.Commands.SendNotification.Handle(ctx, subscriber, message.Message)
+	h.app.Commands.SendNotification.Handle(subscriber, message.Title, message.Message)
 
 	w.WriteHeader(http.StatusAccepted)
 }

@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM golang:1.18.0 as builder
 WORKDIR /app/
 COPY /internal/go.mod ./
@@ -9,6 +11,8 @@ COPY /service-account-file.json ./
 ENV SERVICE_ACCOUNT_FILE "./service-account-file.json"
 ENV GCP_PROJECT "jerens-app"
 ENV SQLITE_DB "./sqlite.db"
+ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com/;http://api.jerenslensun.com/"
 ENV PORT 8080
 EXPOSE 8080
 ENTRYPOINT ["/main"]
+

@@ -3,7 +3,7 @@ package query
 import (
 	"context"
 
-	"github.com/sirupsen/logrus"
+	"github.com/jerensl/jerens-web-api/internal/logs/errors"
 )
 
 type CheckTokenHandler struct {
@@ -25,10 +25,11 @@ func NewCheckTokenHandler(tokenRepo CheckTokenReadModel) CheckTokenHandler {
 	}
 }
 
-func (c CheckTokenHandler) Handle(ctx context.Context, query string) (hasToken bool, err error) {
-	defer func() {
-		logrus.WithError(err).Debug("CheckTokenHandler Executed")
-	}()
+func (c CheckTokenHandler) Handle(ctx context.Context, query string) (bool, error) {
+	hasToken, err := c.readToModel.GetToken(ctx, query)
+	if err != nil {
+		return hasToken, errors.NewSlugError(err.Error(), "unable to get token")
+	}
 
-	return c.readToModel.GetToken(ctx, query)
+	return hasToken, nil
 }

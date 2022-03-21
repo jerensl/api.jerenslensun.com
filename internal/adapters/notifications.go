@@ -38,20 +38,26 @@ type Messaging struct {
 	MessagingClient *messaging.Client
 }
 
-func (m *Messaging) SendNotification(token []string, messageClient string) error {
+func (m *Messaging) SendNotification(token []string, title string, message string) error {
 	if len(token) < 0 {
 		return errors.New("Unable to get token list")
 	}
 
-	message := &messaging.MulticastMessage{
+	notification := &messaging.MulticastMessage{
 		Notification: &messaging.Notification{
-			Title: "Jerens App",
-			Body: messageClient,
+			Title: title,
+			Body: message,
+		},
+		Webpush: &messaging.WebpushConfig{
+			Notification: &messaging.WebpushNotification{
+				Title: title,
+				Body: message,
+			},
 		},
 		Tokens: token,
 	}
 
-	br, err := m.MessagingClient.SendMulticast(context.Background(), message)
+	br, err := m.MessagingClient.SendMulticast(context.Background(), notification)
 	if err != nil {
 		log.Fatalln(err)
 	}
