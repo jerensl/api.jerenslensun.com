@@ -2,6 +2,7 @@ package adapters
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/pkg/errors"
 
@@ -58,10 +59,12 @@ func (s SQLiteTokenRepository) GetToken(ctx context.Context, value string) (hasV
 	
 	row := s.db.QueryRow("SELECT 1 FROM token WHERE token = (?)",value)
 	err = row.Scan(&values)
-	if err != nil {
+	if errors.Is(err, sql.ErrNoRows) {
 		return false, nil
-	}	
-	return values > 0, nil
+	} else if err != nil {
+		return false, errors.Wrap(err, "unable to get token from db")
+	}
+	return true, nil
 }
 
 func (s SQLiteTokenRepository) GetAllToken(ctx context.Context) (subscriber []string, err error) {
