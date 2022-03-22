@@ -16,6 +16,6 @@ type Commands struct {
 }
 
 type Queries struct {
-	CheckIfTokenExist query.CheckTokenHandler
+	GetStatusSubscriber query.GetStatusSubscriberHandler
 	GetAllSubscriber query.GetAllSubscriberHandler
 }

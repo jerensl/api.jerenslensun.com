@@ -6,26 +6,26 @@ import (
 	"github.com/jerensl/jerens-web-api/internal/logs/errors"
 )
 
-type CheckTokenHandler struct {
-	readToModel CheckTokenReadModel
+type GetStatusSubscriberHandler struct {
+	readToModel GetTokenReadModel
 }
 
-type CheckTokenReadModel interface {
+type GetTokenReadModel interface {
 	GetToken(ctx context.Context, token string) (bool, error)
 }
 
 
-func NewCheckTokenHandler(tokenRepo CheckTokenReadModel) CheckTokenHandler {
+func NewGetStatusSubscriberHandler(tokenRepo GetTokenReadModel) GetStatusSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}
 
-	return CheckTokenHandler{
+	return GetStatusSubscriberHandler{
 		readToModel: tokenRepo,
 	}
 }
 
-func (c CheckTokenHandler) Handle(ctx context.Context, query string) (bool, error) {
+func (c GetStatusSubscriberHandler) Handle(ctx context.Context, query string) (bool, error) {
 	hasToken, err := c.readToModel.GetToken(ctx, query)
 	if err != nil {
 		return hasToken, errors.NewSlugError(err.Error(), "unable to get token")

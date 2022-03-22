@@ -2,7 +2,6 @@ package adapters
 
 import (
 	"context"
-	"os"
 
 	"github.com/pkg/errors"
 
@@ -10,8 +9,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func NewSQLiteConnection() (*sqlx.DB, error) {
-	db, err := sqlx.Connect("sqlite3", os.Getenv("SQLITE_DB_TEST"))
+func NewSQLiteConnection(file string) (*sqlx.DB, error) {
+	db, err := sqlx.Connect("sqlite3", file)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
@@ -60,7 +59,7 @@ func (s SQLiteTokenRepository) GetToken(ctx context.Context, value string) (hasV
 	row := s.db.QueryRow("SELECT 1 FROM token WHERE token = (?)",value)
 	err = row.Scan(&values)
 	if err != nil {
-		return false, err
+		return false, nil
 	}	
 	return values > 0, nil
 }

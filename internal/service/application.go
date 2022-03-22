@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"os"
 
 	"github.com/jerensl/jerens-web-api/internal/adapters"
 	"github.com/jerensl/jerens-web-api/internal/app"
@@ -10,7 +11,7 @@ import (
 )
 
 func NewApplication(ctx context.Context) app.Application {
-	db, err := adapters.NewSQLiteConnection()
+	db, err := adapters.NewSQLiteConnection(os.Getenv("SQLITE_DB_TEST"))
 	if err != nil {
 		panic(err)
 	}
@@ -31,7 +32,7 @@ func NewApplication(ctx context.Context) app.Application {
 			SendNotification: command.NewSendNotificationHandler(&messaging),
 		},
 		Queries: app.Queries{
-			CheckIfTokenExist: query.NewCheckTokenHandler(tokenRepository),
+			GetStatusSubscriber: query.NewGetStatusSubscriberHandler(tokenRepository),
 			GetAllSubscriber: query.NewGetAllSubscriberHandler(tokenRepository),
 		},
 	}

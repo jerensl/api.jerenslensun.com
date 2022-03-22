@@ -18,8 +18,14 @@ type Message struct {
 	Title string `json:"title"`
 }
 
-// NewSubscriber defines model for NewSubscriber.
-type NewSubscriber struct {
+// Status defines model for Status.
+type Status struct {
+	// Subscriber status
+	Status bool `json:"status"`
+}
+
+// Subscriber defines model for Subscriber.
+type Subscriber struct {
 	// Client Token
 	Token string `json:"token"`
 }
@@ -27,11 +33,17 @@ type NewSubscriber struct {
 // SendNotificationJSONBody defines parameters for SendNotification.
 type SendNotificationJSONBody Message
 
+// SubscriberStatusJSONBody defines parameters for SubscriberStatus.
+type SubscriberStatusJSONBody Subscriber
+
 // SubscribeNotificationJSONBody defines parameters for SubscribeNotification.
-type SubscribeNotificationJSONBody NewSubscriber
+type SubscribeNotificationJSONBody Subscriber
 
 // SendNotificationJSONRequestBody defines body for SendNotification for application/json ContentType.
 type SendNotificationJSONRequestBody SendNotificationJSONBody
+
+// SubscriberStatusJSONRequestBody defines body for SubscriberStatus for application/json ContentType.
+type SubscriberStatusJSONRequestBody SubscriberStatusJSONBody
 
 // SubscribeNotificationJSONRequestBody defines body for SubscribeNotification for application/json ContentType.
 type SubscribeNotificationJSONRequestBody SubscribeNotificationJSONBody

@@ -2,6 +2,8 @@ package adapters_test
 
 import (
 	"context"
+	"fmt"
+	"os"
 	"testing"
 
 	"github.com/jerensl/jerens-web-api/internal/adapters"
@@ -9,15 +11,16 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
-	db, err := adapters.NewSQLiteConnection()
+func newSqlLiteRepository(t *testing.T, dbPath string) *adapters.SQLiteTokenRepository {
+	db, err := adapters.NewSQLiteConnection(dbPath)
 	require.NoError(t, err)
 
 	return adapters.NewSQLiteTokenRepository(db)
 }
 
 func TestRepository(t *testing.T) {
-	r := newSqlLiteRepository(t)
+	dbPath := "../../database/db_test.sqlite"
+	r := newSqlLiteRepository(t, dbPath)
 
 	t.Run("Test update token", func(t *testing.T) {
 		testUpdatedToken(t, r)
@@ -30,6 +33,11 @@ func TestRepository(t *testing.T) {
 	t.Run("Test update token", func(t *testing.T) {
 		testGetAllToken(t, r)
 	})
+
+	err := os.Remove(dbPath)
+	if err != nil {
+		fmt.Println("cannot remove database")
+	}
 }
 
 func testUpdatedToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {

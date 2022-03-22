@@ -20,7 +20,7 @@ func NewHttpServer(application app.Application) HttpServer {
 }
 
 func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request) {
-	var newSubscriber NewSubscriber
+	var newSubscriber Subscriber
 	if err := json.NewDecoder(r.Body).Decode(&newSubscriber); err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
@@ -55,4 +55,30 @@ func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
 	h.app.Commands.SendNotification.Handle(subscriber, message.Title, message.Message)
 
 	w.WriteHeader(http.StatusAccepted)
+}
+
+func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
+	var subscriber Subscriber
+	if err := json.NewDecoder(r.Body).Decode(&subscriber); err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	ctx := context.Background()
+
+	isSubscriber, err := h.app.Queries.GetStatusSubscriber.Handle(ctx, subscriber.Token)
+	if err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	status := Status{
+		Status: isSubscriber,
+	}
+	if err := json.NewEncoder(w).Encode(status); err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }

@@ -23,10 +23,35 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewSubscriber'
+              $ref: '#/components/schemas/Subscriber'
       responses:
         '201':
           description: todo
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /notification/status:
+    post:
+      summary: Subscriber Status
+      operationId: subscriberStatus
+      requestBody:
+        description: Status of current subscriber
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscriber'
+      responses:
+        '200':
+          description: todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         default:
           description: unexpected error
           content:
@@ -57,13 +82,20 @@ paths:
 
 components:
   schemas:
-    NewSubscriber:
+    Subscriber:
       required:
         - token
       properties:
         token:
           type: string
           description: Client Token
+    Status:
+      required:
+        - status
+      properties:
+        status:
+          type: boolean
+          description: Subscriber status
     Message:
       required:
         - title
