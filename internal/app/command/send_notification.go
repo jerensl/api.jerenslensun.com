@@ -9,7 +9,7 @@ type SendNotificationHandler struct {
 }
 
 type SendNotificationReadModel interface {
-	SendNotification(oken []string, title string, message string) error
+	SendNotification(token []string, title string, message string) error
 }
 
 

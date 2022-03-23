@@ -11,7 +11,7 @@ type AddNewSubscriberHandler struct {
 }
 
 type AddNewSubscriberReadModel interface {
-	UpdatedToken(ctx context.Context, token string) error
+	UpdatedToken(token string) error
 }
 
 
@@ -26,7 +26,7 @@ func NewAddNewSubscriberHandler(tokenRepo AddNewSubscriberReadModel) AddNewSubsc
 }
 
 func (c AddNewSubscriberHandler) Handle(ctx context.Context, query string) (error) {
-	err := c.writeToModel.UpdatedToken(ctx, query)
+	err := c.writeToModel.UpdatedToken(query)
 	if err != nil {
 		return errors.NewSlugError(err.Error(), "unable to add subscriber")
 	}

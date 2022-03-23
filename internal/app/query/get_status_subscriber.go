@@ -11,7 +11,7 @@ type GetStatusSubscriberHandler struct {
 }
 
 type GetTokenReadModel interface {
-	GetToken(ctx context.Context, token string) (bool, error)
+	GetToken(token string) (bool, error)
 }
 
 
@@ -26,7 +26,7 @@ func NewGetStatusSubscriberHandler(tokenRepo GetTokenReadModel) GetStatusSubscri
 }
 
 func (c GetStatusSubscriberHandler) Handle(ctx context.Context, query string) (bool, error) {
-	hasToken, err := c.readToModel.GetToken(ctx, query)
+	hasToken, err := c.readToModel.GetToken(query)
 	if err != nil {
 		return hasToken, errors.NewSlugError(err.Error(), "unable to get token")
 	}

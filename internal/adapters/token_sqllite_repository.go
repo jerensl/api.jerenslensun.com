@@ -1,7 +1,6 @@
 package adapters
 
 import (
-	"context"
 	"database/sql"
 
 	"github.com/pkg/errors"
@@ -39,11 +38,11 @@ func NewSQLiteTokenRepository(db *sqlx.DB) *SQLiteTokenRepository  {
 	}
 }
 
-func (s SQLiteTokenRepository) UpdatedToken(ctx context.Context, token string) error {
-	return s.updatedToken(ctx, token)
+func (s SQLiteTokenRepository) UpdatedToken(token string) error {
+	return s.updatedToken(token)
 }
 
-func (s SQLiteTokenRepository) updatedToken(ctx context.Context, token string) error {
+func (s SQLiteTokenRepository) updatedToken(token string) error {
 	insert := `INSERT INTO token (token) VALUES (?)`
 
 	_, err := s.db.Exec(insert, token)
@@ -54,7 +53,7 @@ func (s SQLiteTokenRepository) updatedToken(ctx context.Context, token string) e
 	return nil
 }
 
-func (s SQLiteTokenRepository) GetToken(ctx context.Context, value string) (hasValue bool, err error) {
+func (s SQLiteTokenRepository) GetToken(value string) (hasValue bool, err error) {
 	var values int
 	
 	row := s.db.QueryRow("SELECT 1 FROM token WHERE token = (?)",value)
@@ -67,11 +66,21 @@ func (s SQLiteTokenRepository) GetToken(ctx context.Context, value string) (hasV
 	return true, nil
 }
 
-func (s SQLiteTokenRepository) GetAllToken(ctx context.Context) (subscriber []string, err error) {
+func (s SQLiteTokenRepository) GetAllToken() (subscriber []string, err error) {
 	err = s.db.Select(&subscriber,"SELECT token FROM token")
 	if err != nil {
 		return nil, err
 	}	
 
 	return subscriber, nil
+}
+
+func (s SQLiteTokenRepository) DeleteToken(token string) error {
+	insert := `DELETE FROM token WHERE token = (?)`
+
+	_, err := s.db.Exec(insert, token)
+	if err != nil {
+		return errors.Wrap(err, "Unable to insert token to database")
+	}
+	return nil
 }

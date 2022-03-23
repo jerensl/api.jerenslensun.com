@@ -1,7 +1,6 @@
 package adapters_test
 
 import (
-	"context"
 	"fmt"
 	"os"
 	"testing"
@@ -22,16 +21,24 @@ func TestRepository(t *testing.T) {
 	dbPath := "../../database/db_test.sqlite"
 	r := newSqlLiteRepository(t, dbPath)
 
-	t.Run("Test update token", func(t *testing.T) {
+	t.Run("Test Update token", func(t *testing.T) {
 		testUpdatedToken(t, r)
 	})
 
-	t.Run("Test update token", func(t *testing.T) {
+	t.Run("Test Get token", func(t *testing.T) {
 		testGetToken(t, r)
 	})
 
-	t.Run("Test update token", func(t *testing.T) {
+	t.Run("Test Get All token", func(t *testing.T) {
 		testGetAllToken(t, r)
+	})
+
+	t.Run("Test Delete token", func(t *testing.T) {
+		testDeleteToken(t, r)
+	})
+
+	t.Run("Test Get All token", func(t *testing.T) {
+		testGetAll2Token(t, r)
 	})
 
 	err := os.Remove(dbPath)
@@ -41,28 +48,38 @@ func TestRepository(t *testing.T) {
 }
 
 func testUpdatedToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	ctx := context.Background()
-	err := repository.UpdatedToken(ctx, "abc123")
+	err := repository.UpdatedToken("abc123")
 	require.NoError(t, err)
-	err = repository.UpdatedToken(ctx, "abc321")
+	err = repository.UpdatedToken("abc321")
 	require.NoError(t, err)
 }
 
 func testGetToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	ctx := context.Background()
-
-	hasValue, err := repository.GetToken(ctx, "abc123")
+	hasValue, err := repository.GetToken("abc123")
 	require.NoError(t, err)
 
 	assert.True(t, hasValue)
 }
 
 func testGetAllToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	ctx := context.Background()
 	expected := []string{"abc123", "abc321"}
 
-	subscriber, err := repository.GetAllToken(ctx)
+	subscriber, err := repository.GetAllToken()
 	require.NoError(t, err)
 
 	assert.Equal(t, expected,subscriber)
+}
+
+func testGetAll2Token(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	expected := []string{"abc321"}
+
+	subscriber, err := repository.GetAllToken()
+	require.NoError(t, err)
+
+	assert.Equal(t, expected,subscriber)
+}
+
+func testDeleteToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	err := repository.DeleteToken("abc123")
+	require.NoError(t, err)
 }

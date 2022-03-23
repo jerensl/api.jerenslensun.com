@@ -11,7 +11,7 @@ type GetAllSubscriberHandler struct {
 }
 
 type GetAllSubscriberReadModel interface {
-	GetAllToken(ctx context.Context) ([]string, error)
+	GetAllToken() ([]string, error)
 }
 
 
@@ -26,7 +26,7 @@ func NewGetAllSubscriberHandler(AllSubscriberRepo GetAllSubscriberReadModel) Get
 }
 
 func (c GetAllSubscriberHandler) Handle(ctx context.Context) ([]string, error) {
-	subscriber, err := c.readToModel.GetAllToken(ctx)
+	subscriber, err := c.readToModel.GetAllToken()
 
 	if err != nil {
 		return nil, errors.NewSlugError(err.Error(), "unable to get all token")

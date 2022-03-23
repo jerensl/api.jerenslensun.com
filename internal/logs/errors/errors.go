@@ -36,6 +36,14 @@ func NewSlugError(error string, slug string) SlugError {
 	}
 }
 
+func NewAuthorizationError(error string, slug string) SlugError {
+	return SlugError{
+		error:     error,
+		slug:      slug,
+		errorType: ErrorTypeAuthorization,
+	}
+}
+
 func NewIncorrectInputError(error string, slug string) SlugError {
 	return SlugError{
 		error:     error,
