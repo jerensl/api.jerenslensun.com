@@ -54,7 +54,7 @@ func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
 
 	h.app.Commands.SendNotification.Handle(subscriber, message.Title, message.Message)
 
-	w.WriteHeader(http.StatusAccepted)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
@@ -76,6 +76,22 @@ func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
 		Status: isSubscriber,
 	}
 	if err := json.NewEncoder(w).Encode(status); err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h HttpServer) UnsubscribeNotification(w http.ResponseWriter, r *http.Request) {
+	var subscriber Subscriber
+	if err := json.NewDecoder(r.Body).Decode(&subscriber); err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	err := h.app.Commands.Unsubscribe.Handle(subscriber.Token)
+	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}

@@ -11,7 +11,7 @@ import (
 )
 
 func NewApplication(ctx context.Context) app.Application {
-	db, err := adapters.NewSQLiteConnection(os.Getenv("SQLITE_DB_TEST"))
+	db, err := adapters.NewSQLiteConnection(os.Getenv("SQLITE_DB"))
 	if err != nil {
 		panic(err)
 	}
@@ -29,6 +29,7 @@ func NewApplication(ctx context.Context) app.Application {
 	return app.Application{
 		Commands: app.Commands{
 			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository),
+			Unsubscribe: command.NewUnsubscribe(tokenRepository),
 			SendNotification: command.NewSendNotificationHandler(&messaging),
 		},
 		Queries: app.Queries{

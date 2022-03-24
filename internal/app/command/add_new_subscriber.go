@@ -7,15 +7,15 @@ import (
 )
 
 type AddNewSubscriberHandler struct {
-	writeToModel AddNewSubscriberReadModel
+	writeToModel AddNewSubscriberWriteModel
 }
 
-type AddNewSubscriberReadModel interface {
+type AddNewSubscriberWriteModel interface {
 	UpdatedToken(token string) error
 }
 
 
-func NewAddNewSubscriberHandler(tokenRepo AddNewSubscriberReadModel) AddNewSubscriberHandler {
+func NewAddNewSubscriberHandler(tokenRepo AddNewSubscriberWriteModel) AddNewSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}

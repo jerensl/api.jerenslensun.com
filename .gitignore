@@ -17,4 +17,4 @@
 # Sqlite db
 /database/sqlite.db
 
-/service-account-file.json
+/service-account-key.json

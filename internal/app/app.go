@@ -13,6 +13,7 @@ type Application struct {
 type Commands struct {
 	AddNewSubscriber command.AddNewSubscriberHandler
 	SendNotification command.SendNotificationHandler
+	Unsubscribe command.UnsubscribeHandler
 }
 
 type Queries struct {

@@ -12,8 +12,9 @@ RUN CGO_ENABLED=1 GOOS=linux go build -o /main -a -ldflags '-linkmode external -
 FROM scratch
 WORKDIR /app/
 COPY --from=builder /main /main
-COPY service-account-file.json /service-account-file.json
-ENV SERVICE_ACCOUNT_FILE "./service-account-file.json"
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY service-account-key.json ./
+ENV SERVICE_ACCOUNT_FILE "./service-account-key.json"
 ENV GCP_PROJECT "jerens-app"
 ENV SQLITE_DB "./sqlite.db"
 ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com/;https://api.jerenslensun.com/"
