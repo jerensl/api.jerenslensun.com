@@ -3,8 +3,6 @@ package adapters
 import (
 	"context"
 	"errors"
-	"fmt"
-	"log"
 	"os"
 
 	firebase "firebase.google.com/go/v4"
@@ -49,19 +47,17 @@ func (m *Messaging) SendNotification(token []string, title string, message strin
 			Body: message,
 		},
 		Webpush: &messaging.WebpushConfig{
-			Notification: &messaging.WebpushNotification{
-				Title: title,
-				Body: message,
+			FCMOptions: &messaging.WebpushFCMOptions{
+				Link: "https://www.jerenslensun.com/",
 			},
 		},
 		Tokens: token,
 	}
 
-	br, err := m.MessagingClient.SendMulticast(context.Background(), notification)
+	_, err := m.MessagingClient.SendMulticast(context.Background(), notification)
 	if err != nil {
-		log.Fatalln(err)
+		return errors.New("Unable to get send notification")
 	}
 
-	fmt.Printf("%d messages were sent successfully\n", br.SuccessCount)
 	return nil
 }
