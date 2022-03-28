@@ -27,7 +27,7 @@ func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http
 
 	logrus.Info("Starting RESTFull Api server on Port "+os.Getenv("PORT"))
 
-	http.ListenAndServe(addr, rootRouter)
+	_ = http.ListenAndServe(addr, rootRouter)
 }
 
 func setMiddlewares(router *chi.Mux)  {
@@ -51,14 +51,14 @@ func addCorsMiddleware(router *chi.Mux) {
 		return
 	}
 
-	corsMiddleware := cors.New(cors.Options{
+	corsMiddleware := cors.Handler(cors.Options{
 		AllowedOrigins:   allowedOrigins,
-		AllowedMethods:   []string{"GET", "POST"},
+		AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
 		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
+		AllowCredentials: false,
 		MaxAge:           300,
 	})
 	
-	router.Use(corsMiddleware.Handler)
+	router.Use(corsMiddleware)
 }

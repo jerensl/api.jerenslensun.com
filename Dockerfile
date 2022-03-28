@@ -17,7 +17,7 @@ COPY service-account-key.json ./
 ENV SERVICE_ACCOUNT_FILE "./service-account-key.json"
 ENV GCP_PROJECT "jerens-app"
 ENV SQLITE_DB "./sqlite.db"
-ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com/;https://api.jerenslensun.com/"
+ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com"
 ENV PORT 8080
 EXPOSE 8080
 
