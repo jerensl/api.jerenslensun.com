@@ -52,8 +52,11 @@ func (s SQLiteTokenRepository) updatedToken(token string) error {
 	
 	return nil
 }
-
 func (s SQLiteTokenRepository) GetToken(value string) (hasValue bool, err error) {
+	return s.getToken(value)
+}
+
+func (s SQLiteTokenRepository) getToken(value string) (hasValue bool, err error) {
 	var values int
 	
 	row := s.db.QueryRow("SELECT 1 FROM token WHERE token = (?)",value)
@@ -67,15 +70,23 @@ func (s SQLiteTokenRepository) GetToken(value string) (hasValue bool, err error)
 }
 
 func (s SQLiteTokenRepository) GetAllToken() (subscriber []string, err error) {
+	return s.getAllToken()
+}
+
+func (s SQLiteTokenRepository) getAllToken() (subscriber []string, err error) {
 	err = s.db.Select(&subscriber,"SELECT token FROM token")
 	if err != nil {
-		return nil, err
+		return nil,  errors.Wrap(err, "unable to get all token from db")
 	}	
 
 	return subscriber, nil
 }
 
 func (s SQLiteTokenRepository) DeleteToken(token string) error {
+	return s.deleteToken(token)
+}
+
+func (s SQLiteTokenRepository) deleteToken(token string) error {
 	insert := `DELETE FROM token WHERE token = (?)`
 
 	_, err := s.db.Exec(insert, token)
