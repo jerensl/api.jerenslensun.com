@@ -18,3 +18,7 @@
 /database/sqlite.db
 
 /service-account-key.json
+
+# enviroment variable
+test.env
+.env

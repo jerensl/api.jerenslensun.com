@@ -87,11 +87,14 @@ func (s SQLiteTokenRepository) DeleteToken(token string) error {
 }
 
 func (s SQLiteTokenRepository) deleteToken(token string) error {
-	insert := `DELETE FROM token WHERE token = (?)`
+	insert := "DELETE FROM token WHERE token = (?) RETURNING token"
 
-	_, err := s.db.Exec(insert, token)
-	if err != nil {
-		return errors.Wrap(err, "Unable to insert token to database")
+	err := s.db.QueryRow(insert, token).Scan(&token)
+	if errors.Is(err, sql.ErrNoRows) {
+		return errors.Wrap(err, "Cannot find token from database")
+	} else if err != nil {
+		return errors.Wrap(err, "Unable to delete token from database")
 	}
+
 	return nil
 }
