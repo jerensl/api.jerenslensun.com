@@ -2,7 +2,7 @@
 This Restful Api is notification api for my [personal web app](https://www.jerenslensun.com/)
 
 ### Api Documentation
-This api documentation is available [here](jerensl.github.io/jerens-web-api/)
+This api documentation is available [here](https://jerensl.github.io/jerens-web-api/)
 
 ### Technology Used
 - Golang
