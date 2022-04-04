@@ -5,4 +5,4 @@ This Restful Api is notification api for my [personal web app](https://www.jeren
 This api documenation is available [here](jerensl.github.io/jerens-web-api/)
 
 ### C4 Diagram
-![C4 Diagram](/tools/c4/view-notification.png)
+![C4 Diagram](/tools/c4/out/view-notification.png)
