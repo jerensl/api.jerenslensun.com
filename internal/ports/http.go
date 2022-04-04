@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"os"
 
 	"github.com/jerensl/jerens-web-api/internal/app"
 	"github.com/jerensl/jerens-web-api/internal/logs/httperr"
@@ -35,26 +36,6 @@ func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request
 	}
 
 	w.WriteHeader(http.StatusCreated)
-}
-
-func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
-	var message Message
-	if err := json.NewDecoder(r.Body).Decode(&message); err != nil {
-		httperr.RespondWithSlugError(err, w, r)
-		return
-	}
-
-	ctx := context.Background()
-
-	subscriber, err := h.app.Queries.GetAllSubscriber.Handle(ctx)
-	if err != nil {
-		httperr.RespondWithSlugError(err, w, r)
-		return
-	}
-
-	h.app.Commands.SendNotification.Handle(subscriber, message.Title, message.Message)
-
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
@@ -95,6 +76,32 @@ func (h HttpServer) UnsubscribeNotification(w http.ResponseWriter, r *http.Reque
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
+	var message Message
+	if err := json.NewDecoder(r.Body).Decode(&message); err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	token := r.Header.Get("X-API-KEY")
+	if token != os.Getenv("API_KEY") {
+		httperr.Unauthorised("invalid token", nil,w, r)
+		return
+	}
+
+	ctx := context.Background()
+
+	subscriber, err := h.app.Queries.GetAllSubscriber.Handle(ctx)
+	if err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	h.app.Commands.SendNotification.Handle(subscriber, message.Title, message.Message)
 
 	w.WriteHeader(http.StatusOK)
 }

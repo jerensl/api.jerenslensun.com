@@ -2,17 +2,14 @@ openapi: "3.0.0"
 info:
   version: 1.0.0
   title: Jerens Web App
-  description: TODO
+  description: RESTful Api for notification personal web
   contact:
     name: Jerens Lensun
     url: https://www.jerenslensun.com/
 servers:
-  - url: https://{hostname}/api
-    variables:
-      hostname:
-        default: localhost
+  - url: https://api.jerenslensun.com/api
+    description: Production Server
 paths:
-
   /notification/subscribe:
     post:
       summary: Subscribe to notification
@@ -100,6 +97,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - ApiKeyAuth: []
 
 components:
   schemas:
@@ -109,6 +108,7 @@ components:
       properties:
         token:
           type: string
+          example: "abc123"
           description: Client Token
     Status:
       required:
@@ -116,6 +116,7 @@ components:
       properties:
         status:
           type: boolean
+          example: false
           description: Subscriber status
     Message:
       required:
@@ -124,9 +125,11 @@ components:
       properties:
         title:
           type: string
+          example: "New Article"
           description: Notification title
         message:
           type: string
+          example: "Article about something"
           description: Notification message
     Error:
       type: object
@@ -138,3 +141,8 @@ components:
           type: string
         message:
           type: string
+  securitySchemes:
+    ApiKeyAuth:        
+      type: apiKey
+      in: header       
+      name: X-API-KEY 

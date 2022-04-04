@@ -863,11 +863,13 @@ ul.nav-tabs {
   "properties" : {
     "title" : {
       "type" : "string",
-      "description" : "Notification title"
+      "description" : "Notification title",
+      "example" : "New Article"
     },
     "message" : {
       "type" : "string",
-      "description" : "Notification message"
+      "description" : "Notification message",
+      "example" : "Article about something"
     }
   }
 };
@@ -876,7 +878,8 @@ ul.nav-tabs {
   "properties" : {
     "status" : {
       "type" : "boolean",
-      "description" : "Subscriber status"
+      "description" : "Subscriber status",
+      "example" : false
     }
   }
 };
@@ -885,7 +888,8 @@ ul.nav-tabs {
   "properties" : {
     "token" : {
       "type" : "string",
-      "description" : "Client Token"
+      "description" : "Client Token",
+      "example" : "abc123"
     }
   }
 };
@@ -936,7 +940,7 @@ ul.nav-tabs {
               <div class="app-desc">Version: 1.0.0</div>
             <hr>
             <div id="app-description" class="app-desc">
-                TODO
+                RESTful Api for notification personal web
             </div>
           </div>
         </div>
@@ -979,10 +983,10 @@ ul.nav-tabs {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: application/json" \
  -H "Content-Type: application/json" \
- "https://localhost/api/notification/send" \
+ "https://api.jerenslensun.com/api/notification/send" \
  -d '{
-  &quot;title&quot; : &quot;title&quot;,
-  &quot;message&quot; : &quot;message&quot;
+  &quot;title&quot; : &quot;New Article&quot;,
+  &quot;message&quot; : &quot;Article about something&quot;
 }'
 </code></pre>
                           </div>
@@ -1355,9 +1359,9 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: application/json" \
  -H "Content-Type: application/json" \
- "https://localhost/api/notification/subscribe" \
+ "https://api.jerenslensun.com/api/notification/subscribe" \
  -d '{
-  &quot;token&quot; : &quot;token&quot;
+  &quot;token&quot; : &quot;abc123&quot;
 }'
 </code></pre>
                           </div>
@@ -1730,9 +1734,9 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: application/json" \
  -H "Content-Type: application/json" \
- "https://localhost/api/notification/status" \
+ "https://api.jerenslensun.com/api/notification/status" \
  -d '{
-  &quot;token&quot; : &quot;token&quot;
+  &quot;token&quot; : &quot;abc123&quot;
 }'
 </code></pre>
                           </div>
@@ -2158,9 +2162,9 @@ $(document).ready(function() {
                             <pre class="prettyprint"><code class="language-bsh">curl -X POST \
  -H "Accept: application/json" \
  -H "Content-Type: application/json" \
- "https://localhost/api/notification/unsubscribe" \
+ "https://api.jerenslensun.com/api/notification/unsubscribe" \
  -d '{
-  &quot;token&quot; : &quot;token&quot;
+  &quot;token&quot; : &quot;abc123&quot;
 }'
 </code></pre>
                           </div>

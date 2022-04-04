@@ -4,6 +4,7 @@
 package ports
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 
@@ -38,6 +39,8 @@ type MiddlewareFunc func(http.HandlerFunc) http.HandlerFunc
 // SendNotification operation middleware
 func (siw *ServerInterfaceWrapper) SendNotification(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
+
+	ctx = context.WithValue(ctx, ApiKeyAuthScopes, []string{""})
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.SendNotification(w, r)
