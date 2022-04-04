@@ -8,6 +8,7 @@ This api documentation is available [here](jerensl.github.io/jerens-web-api/)
 - Golang
 - Open Api 3.0
 - Sqlite
+- Firebase Mesagging
 - Docker
 
 ### C4 Diagram
