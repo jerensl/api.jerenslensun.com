@@ -1,0 +1,49 @@
+configuration:
+  pkgs:
+    - "github.com"
+    - "github.com/jmoiron/sqlx"
+
+rules:
+  - name_regexp: ".*"
+    pkg_regexps:
+      - ".*/app$"
+    component:
+      description: "application context"
+      tags:
+        - ROOT
+  - name_regexp: ".*"
+    pkg_regexps:
+      - ".*/app/.*"
+    component:
+      description: "application component"
+      tags:
+        - APP
+  - name_regexp: ".*"
+    pkg_regexps:
+      - ".*/app/command*"
+    component:
+      description: "application command"
+      tags:
+        - APP
+  - name_regexp: ".*"
+    pkg_regexps:
+      - ".*/app/query"
+    component:
+      description: "application query"
+      tags:
+        - APP
+  - name_regexp: ".*"
+    pkg_regexps:
+      - ".*/adapters"
+    component:
+      description: "adapter component"
+      tags:
+        - ADAPTER
+  - name_regexp: ".*"
+    pkg_regexps:
+      - "github.com/jmoiron/sqlx$"
+    component:
+      name: "Sqlite 3"
+      description: "database component"
+      tags:
+        - DB
