@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/jerensl/jerens-web-api/internal/ports"
-	"github.com/jerensl/jerens-web-api/internal/server"
-	"github.com/jerensl/jerens-web-api/internal/tests"
+	"github.com/jerensl/api.jerenslensun.com/internal/ports"
+	"github.com/jerensl/api.jerenslensun.com/internal/server"
+	"github.com/jerensl/api.jerenslensun.com/internal/tests"
 )
 
 

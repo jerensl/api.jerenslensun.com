@@ -1,4 +1,4 @@
-module github.com/jerensl/jerens-web-api/tools/c4
+module github.com/jerensl/api.jerenslensun.com/tools/c4
 
 go 1.18
 
@@ -33,3 +33,5 @@ require (
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
+
+replace github.com/jerensl/api.jerenslensun.com/internal => ../../internal/

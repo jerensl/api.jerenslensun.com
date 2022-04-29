@@ -1,8 +1,8 @@
 package app
 
 import (
-	"github.com/jerensl/jerens-web-api/internal/app/command"
-	"github.com/jerensl/jerens-web-api/internal/app/query"
+	"github.com/jerensl/api.jerenslensun.com/internal/app/command"
+	"github.com/jerensl/api.jerenslensun.com/internal/app/query"
 )
 
 type Application struct {

@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/go-chi/render"
-	"github.com/jerensl/jerens-web-api/internal/logs"
-	"github.com/jerensl/jerens-web-api/internal/logs/errors"
+	"github.com/jerensl/api.jerenslensun.com/internal/logs"
+	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 func InternalError(slug string, err error, w http.ResponseWriter, r *http.Request) {

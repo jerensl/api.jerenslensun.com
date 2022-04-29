@@ -4,10 +4,10 @@ import (
 	"context"
 	"os"
 
-	"github.com/jerensl/jerens-web-api/internal/adapters"
-	"github.com/jerensl/jerens-web-api/internal/app"
-	"github.com/jerensl/jerens-web-api/internal/app/command"
-	"github.com/jerensl/jerens-web-api/internal/app/query"
+	"github.com/jerensl/api.jerenslensun.com/internal/adapters"
+	"github.com/jerensl/api.jerenslensun.com/internal/app"
+	"github.com/jerensl/api.jerenslensun.com/internal/app/command"
+	"github.com/jerensl/api.jerenslensun.com/internal/app/query"
 )
 
 func NewApplication(ctx context.Context) app.Application {

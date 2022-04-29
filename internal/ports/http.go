@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/jerensl/jerens-web-api/internal/app"
-	"github.com/jerensl/jerens-web-api/internal/logs/httperr"
+	"github.com/jerensl/api.jerenslensun.com/internal/app"
+	"github.com/jerensl/api.jerenslensun.com/internal/logs/httperr"
 )
 
 type HttpServer struct {

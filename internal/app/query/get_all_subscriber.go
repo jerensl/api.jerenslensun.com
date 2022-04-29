@@ -3,7 +3,7 @@ package query
 import (
 	"context"
 
-	"github.com/jerensl/jerens-web-api/internal/logs/errors"
+	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type GetAllSubscriberHandler struct {

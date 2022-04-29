@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	service "github.com/jerensl/jerens-web-api/internal/service"
+	service "github.com/jerensl/api.jerenslensun.com/internal/service"
 	"github.com/krzysztofreczek/go-structurizr/pkg/scraper"
 	"github.com/krzysztofreczek/go-structurizr/pkg/view"
 )

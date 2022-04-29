@@ -12,3 +12,7 @@ openapi_documentation:
   -i /local/api/openapi/notification.yml \
   -g html2 \
   -o /local/documentation/openapi
+
+.PHONY: diagram_c4
+diagram_c4:
+	docker run -d -p 8888:8080 plantuml/plantuml-server:jetty

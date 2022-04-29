@@ -10,7 +10,7 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/sirupsen/logrus"
 
-	"github.com/jerensl/jerens-web-api/internal/logs"
+	"github.com/jerensl/api.jerenslensun.com/internal/logs"
 )
 
 func RunHTTPServer(createHandler func(router chi.Router) http.Handler) {

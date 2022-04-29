@@ -8,7 +8,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jerensl/jerens-web-api/internal/tests/client"
+	"github.com/jerensl/api.jerenslensun.com/internal/tests/client"
 	"github.com/stretchr/testify/require"
 )
 

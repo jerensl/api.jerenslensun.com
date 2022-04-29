@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jerensl/jerens-web-api/internal/adapters"
+	"github.com/jerensl/api.jerenslensun.com/internal/adapters"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
