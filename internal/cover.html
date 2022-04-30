@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>adapters: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">github.com/jerensl/api.jerenslensun.com/internal/adapters/notifications.go (0.0%)</option>
+				
+				<option value="file1">github.com/jerensl/api.jerenslensun.com/internal/adapters/token_sqllite_repository.go (78.4%)</option>
+				
+				<option value="file2">github.com/jerensl/api.jerenslensun.com/internal/service/application.go (77.8%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package adapters
+
+import (
+        "context"
+        "errors"
+        "os"
+
+        firebase "firebase.google.com/go/v4"
+        "firebase.google.com/go/v4/messaging"
+        "github.com/sirupsen/logrus"
+        "google.golang.org/api/option"
+)
+
+func NewFirebaseMessagingConnection() (*messaging.Client, error) <span class="cov0" title="0">{
+        var opts []option.ClientOption
+        ctx := context.Background()
+
+        if file := os.Getenv("SERVICE_ACCOUNT_FILE"); file != "" </span><span class="cov0" title="0">{
+                opts = append(opts, option.WithCredentialsFile(file))
+        }</span>
+        <span class="cov0" title="0">config := &amp;firebase.Config{ProjectID: os.Getenv("GCP_PROJECT")}
+        firebaseApp, err := firebase.NewApp(context.Background(), config, opts...)
+        if err != nil </span><span class="cov0" title="0">{
+                logrus.Fatalf("error initializing app: %v\n", err)
+        }</span>
+
+        <span class="cov0" title="0">client, err := firebaseApp.Messaging(ctx)
+        if err != nil </span><span class="cov0" title="0">{
+                logrus.Fatalf("error getting Messaging client: %v\n", err)
+        }</span>
+
+        <span class="cov0" title="0">return client, nil</span>
+}
+
+type Messaging struct {
+        MessagingClient *messaging.Client
+}
+
+func (m *Messaging) SendNotification(token []string, title string, message string) error <span class="cov0" title="0">{
+        if len(token) &lt; 0 </span><span class="cov0" title="0">{
+                return errors.New("Unable to get token list")
+        }</span>
+
+        <span class="cov0" title="0">notification := &amp;messaging.MulticastMessage{
+                Notification: &amp;messaging.Notification{
+                        Title: title,
+                        Body: message,
+                },
+                Webpush: &amp;messaging.WebpushConfig{
+                        FCMOptions: &amp;messaging.WebpushFCMOptions{
+                                Link: "https://www.jerenslensun.com/",
+                        },
+                },
+                Tokens: token,
+        }
+
+        _, err := m.MessagingClient.SendMulticast(context.Background(), notification)
+        if err != nil </span><span class="cov0" title="0">{
+                return errors.New("Unable to get send notification")
+        }</span>
+
+        <span class="cov0" title="0">return nil</span>
+}</pre>
+		
+		<pre class="file" id="file1" style="display: none">package adapters
+
+import (
+        "database/sql"
+
+        "github.com/pkg/errors"
+
+        "github.com/jmoiron/sqlx"
+        _ "github.com/mattn/go-sqlite3"
+)
+
+func NewSQLiteConnection(file string) (*sqlx.DB, error) <span class="cov8" title="1">{
+        db, err := sqlx.Connect("sqlite3", file)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, errors.Wrap(err, "cannot connect to sqlite")
+        }</span>
+
+        <span class="cov8" title="1">schema := `CREATE TABLE IF NOT EXISTS token (
+                token text NOT NULL PRIMARY KEY
+        );`
+
+        _, err = db.Exec(schema)
+        if err != nil </span><span class="cov0" title="0">{
+                return nil, errors.Wrap(err, "cannot connect to sqlite")
+        }</span>
+
+        <span class="cov8" title="1">return        db, nil</span>
+}
+
+type SQLiteTokenRepository struct {
+        db *sqlx.DB
+}
+
+func NewSQLiteTokenRepository(db *sqlx.DB) *SQLiteTokenRepository  <span class="cov8" title="1">{
+
+        return &amp;SQLiteTokenRepository{
+                db: db,
+        }
+}</span>
+
+func (s SQLiteTokenRepository) UpdatedToken(token string) error <span class="cov8" title="1">{
+        return s.updatedToken(token)
+}</span>
+
+func (s SQLiteTokenRepository) updatedToken(token string) error <span class="cov8" title="1">{
+        insert := `INSERT INTO token (token) VALUES (?)`
+
+        _, err := s.db.Exec(insert, token)
+        if err != nil </span><span class="cov0" title="0">{
+                return errors.Wrap(err, "Unable to insert token to database")
+        }</span>
+        
+        <span class="cov8" title="1">return nil</span>
+}
+func (s SQLiteTokenRepository) GetToken(value string) (hasValue bool, err error) <span class="cov8" title="1">{
+        return s.getToken(value)
+}</span>
+
+func (s SQLiteTokenRepository) getToken(value string) (hasValue bool, err error) <span class="cov8" title="1">{
+        var values int
+        
+        row := s.db.QueryRow("SELECT 1 FROM token WHERE token = (?)",value)
+        err = row.Scan(&amp;values)
+        if errors.Is(err, sql.ErrNoRows) </span><span class="cov0" title="0">{
+                return false, nil
+        }</span> else<span class="cov8" title="1"> if err != nil </span><span class="cov0" title="0">{
+                return false, errors.Wrap(err, "unable to get token from db")
+        }</span>
+        <span class="cov8" title="1">return true, nil</span>
+}
+
+func (s SQLiteTokenRepository) GetAllToken() (subscriber []string, err error) <span class="cov8" title="1">{
+        return s.getAllToken()
+}</span>
+
+func (s SQLiteTokenRepository) getAllToken() (subscriber []string, err error) <span class="cov8" title="1">{
+        err = s.db.Select(&amp;subscriber,"SELECT token FROM token")
+        if err != nil </span><span class="cov0" title="0">{
+                return nil,  errors.Wrap(err, "unable to get all token from db")
+        }</span>        
+
+        <span class="cov8" title="1">return subscriber, nil</span>
+}
+
+func (s SQLiteTokenRepository) DeleteToken(token string) error <span class="cov8" title="1">{
+        return s.deleteToken(token)
+}</span>
+
+func (s SQLiteTokenRepository) deleteToken(token string) error <span class="cov8" title="1">{
+        insert := "DELETE FROM token WHERE token = (?) RETURNING token"
+
+        err := s.db.QueryRow(insert, token).Scan(&amp;token)
+        if errors.Is(err, sql.ErrNoRows) </span><span class="cov0" title="0">{
+                return errors.Wrap(err, "Cannot find token from database")
+        }</span> else<span class="cov8" title="1"> if err != nil </span><span class="cov0" title="0">{
+                return errors.Wrap(err, "Unable to delete token from database")
+        }</span>
+
+        <span class="cov8" title="1">return nil</span>
+}</pre>
+		
+		<pre class="file" id="file2" style="display: none">package service
+
+import (
+        "context"
+        "os"
+
+        "github.com/jerensl/api.jerenslensun.com/internal/adapters"
+        "github.com/jerensl/api.jerenslensun.com/internal/app"
+        "github.com/jerensl/api.jerenslensun.com/internal/app/command"
+        "github.com/jerensl/api.jerenslensun.com/internal/app/query"
+)
+
+func NewApplication(ctx context.Context) app.Application <span class="cov8" title="1">{
+        db, err := adapters.NewSQLiteConnection(os.Getenv("SQLITE_DB"))
+        if err != nil </span><span class="cov0" title="0">{
+                panic(err)</span>
+        }
+
+        <span class="cov8" title="1">tokenRepository := adapters.NewSQLiteTokenRepository(db)
+        messageClient, err := adapters.NewFirebaseMessagingConnection()
+        if err != nil </span><span class="cov0" title="0">{
+                panic(err)</span>
+        }
+
+        <span class="cov8" title="1">messaging := adapters.Messaging{
+                MessagingClient: messageClient,
+        }
+
+        return app.Application{
+                Commands: app.Commands{
+                        AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository),
+                        Unsubscribe: command.NewUnsubscribe(tokenRepository),
+                        SendNotification: command.NewSendNotificationHandler(&amp;messaging),
+                },
+                Queries: app.Queries{
+                        GetStatusSubscriber: query.NewGetStatusSubscriberHandler(tokenRepository),
+                        GetAllSubscriber: query.NewGetAllSubscriberHandler(tokenRepository),
+                },
+        }</span>
+}</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>

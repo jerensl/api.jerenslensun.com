@@ -3,6 +3,11 @@ module github.com/jerensl/api.jerenslensun.com/tools/c4
 go 1.18
 
 require (
+	github.com/jerensl/api.jerenslensun.com/internal v0.0.0-00010101000000-000000000000
+	github.com/krzysztofreczek/go-structurizr v0.1.6
+)
+
+require (
 	cloud.google.com/go v0.100.2 // indirect
 	cloud.google.com/go/compute v1.5.0 // indirect
 	cloud.google.com/go/firestore v1.6.1 // indirect
@@ -14,9 +19,7 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/googleapis/gax-go/v2 v2.2.0 // indirect
-	github.com/jerensl/jerens-web-api/internal v0.0.0-20220330052506-09c6b869d7fa // indirect
 	github.com/jmoiron/sqlx v1.3.4 // indirect
-	github.com/krzysztofreczek/go-structurizr v0.1.6 // indirect
 	github.com/mattn/go-sqlite3 v1.14.12 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
