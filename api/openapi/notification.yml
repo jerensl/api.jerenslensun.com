@@ -15,7 +15,7 @@ paths:
       summary: Subscribe to notification
       operationId: subscribeNotification
       requestBody:
-        description: Register new Token to a server
+        description: sending new push notification token to subscribe from client
         required: true
         content:
           application/json:
@@ -23,7 +23,7 @@ paths:
               $ref: '#/components/schemas/Subscriber'
       responses:
         '201':
-          description: todo
+          description: response subscribe from server
         default:
           description: unexpected error
           content:
@@ -36,7 +36,7 @@ paths:
       summary: Unsubscribe to notification
       operationId: unsubscribeNotification
       requestBody:
-        description: Delete Token from a server
+        description: sending push notification Token to unsubscribe from server
         required: true
         content:
           application/json:
@@ -44,7 +44,7 @@ paths:
               $ref: '#/components/schemas/Subscriber'
       responses:
         '200':
-          description: todo
+          description: Response Unsubscribe from server
         default:
           description: unexpected error
           content:
@@ -57,7 +57,7 @@ paths:
       summary: Subscriber Status
       operationId: subscriberStatus
       requestBody:
-        description: Status of current subscriber
+        description: sending push notification Token to get status from server
         required: true
         content:
           application/json:
@@ -82,7 +82,7 @@ paths:
       summary: Send notification to all subscriber
       operationId: sendNotification
       requestBody:
-        description: Register new Token to a server
+        description: sending push notification message to all subscribers from server
         required: true
         content:
           application/json:
