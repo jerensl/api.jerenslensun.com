@@ -15,4 +15,4 @@ openapi_documentation:
 
 .PHONY: diagram_c4
 diagram_c4:
-	docker run -d -p 8888:8080 plantuml/plantuml-server:jetty
+	docker run -d -p 8080:8080 plantuml/plantuml-server:jetty

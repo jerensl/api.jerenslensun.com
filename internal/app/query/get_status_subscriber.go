@@ -3,30 +3,27 @@ package query
 import (
 	"context"
 
+	"github.com/jerensl/api.jerenslensun.com/internal/domain"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type GetStatusSubscriberHandler struct {
-	readToModel GetTokenReadModel
-}
-
-type GetTokenReadModel interface {
-	GetToken(token string) (bool, error)
+	tokenRepo domain.Repository
 }
 
 
-func NewGetStatusSubscriberHandler(tokenRepo GetTokenReadModel) GetStatusSubscriberHandler {
+func NewGetStatusSubscriberHandler(tokenRepo domain.Repository) GetStatusSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}
 
 	return GetStatusSubscriberHandler{
-		readToModel: tokenRepo,
+		tokenRepo: tokenRepo,
 	}
 }
 
 func (c GetStatusSubscriberHandler) Handle(ctx context.Context, query string) (bool, error) {
-	hasToken, err := c.readToModel.GetToken(query)
+	hasToken, err := c.tokenRepo.GetToken(query)
 	if err != nil {
 		return hasToken, errors.NewSlugError(err.Error(), "unable to get token")
 	}

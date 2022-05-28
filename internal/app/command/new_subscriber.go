@@ -3,30 +3,26 @@ package command
 import (
 	"context"
 
+	"github.com/jerensl/api.jerenslensun.com/internal/domain"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type AddNewSubscriberHandler struct {
-	writeToModel AddNewSubscriberWriteModel
+	tokenRepo domain.Repository
 }
 
-type AddNewSubscriberWriteModel interface {
-	UpdatedToken(token string) error
-}
-
-
-func NewAddNewSubscriberHandler(tokenRepo AddNewSubscriberWriteModel) AddNewSubscriberHandler {
+func NewAddNewSubscriberHandler(tokenRepo domain.Repository) AddNewSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}
 
 	return AddNewSubscriberHandler{
-		writeToModel: tokenRepo,
+		tokenRepo: tokenRepo,
 	}
 }
 
 func (c AddNewSubscriberHandler) Handle(ctx context.Context, query string) (error) {
-	err := c.writeToModel.UpdatedToken(query)
+	err := c.tokenRepo.UpdatedToken(query)
 	if err != nil {
 		return errors.NewSlugError(err.Error(), "unable to add subscriber")
 	}

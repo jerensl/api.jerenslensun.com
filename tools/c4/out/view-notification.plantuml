@@ -1,0 +1,101 @@
+This diagram has been generated with go-structurizr 
+[https://github.com/krzysztofreczek/go-structurizr]
+
+@startuml
+
+title Service components
+
+skinparam {
+  shadowing false
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+}
+hide stereotype
+top to bottom direction
+
+scale 4096 width
+
+skinparam rectangle<<_GROUP>> {
+  FontColor #ffffff
+  BorderColor #ffffff
+}
+
+skinparam rectangle<<ROOT>> {
+  BackgroundColor #ffffff
+  FontColor #000000
+  BorderColor #000000
+}
+
+skinparam rectangle<<APP>> {
+  BackgroundColor #1a4577
+  FontColor #ffffff
+  BorderColor #000000
+}
+
+skinparam rectangle<<ADAPTER>> {
+  BackgroundColor #2d69b7
+  FontColor #ffffff
+  BorderColor #000000
+}
+
+skinparam rectangle<<DOMAIN>> {
+  BackgroundColor #ffffff
+  FontColor #000000
+  BorderColor #000000
+}
+
+skinparam database<<DB>> {
+  BackgroundColor #c8c8c8
+  FontColor #000000
+  BorderColor #000000
+}
+
+rectangle 0ROOT <<_GROUP>> {
+	rectangle "==app.Commands\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 2640234945
+}
+rectangle 0ROOT <<_GROUP>> {
+	rectangle "==app.Queries\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 1654094325
+}
+rectangle 0ROOT <<_GROUP>> {
+	rectangle "==app.Application\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 3014183467
+}
+rectangle 16540943251APP <<_GROUP>> {
+	rectangle "==query.GetStatusSubscriberHandler\n<size:10>[component]</size>\n\napplication query" <<APP>> as 1339924498
+}
+1654094325 .[#000000].> 1339924498 : ""
+rectangle 16540943251APP <<_GROUP>> {
+	rectangle "==query.GetAllSubscriberHandler\n<size:10>[component]</size>\n\napplication query" <<APP>> as 1245755489
+}
+1654094325 .[#000000].> 1245755489 : ""
+3014183467 .[#000000].> 2640234945 : ""
+3014183467 .[#000000].> 1654094325 : ""
+rectangle 26402349451APP <<_GROUP>> {
+	rectangle "==command.AddNewSubscriberHandler\n<size:10>[component]</size>\n\napplication command" <<APP>> as 256448832
+}
+2640234945 .[#000000].> 256448832 : ""
+rectangle 26402349451APP <<_GROUP>> {
+	rectangle "==command.SendNotificationHandler\n<size:10>[component]</size>\n\napplication command" <<APP>> as 2889279572
+}
+2640234945 .[#000000].> 2889279572 : ""
+rectangle 26402349451APP <<_GROUP>> {
+	rectangle "==command.UnsubscribeHandler\n<size:10>[component]</size>\n\napplication command" <<APP>> as 3563315582
+}
+2640234945 .[#000000].> 3563315582 : ""
+rectangle 2564488322ADAPTER <<_GROUP>> {
+	rectangle "==adapters.SQLiteTokenRepository\n<size:10>[component]</size>\n\nadapter component" <<ADAPTER>> as 1114428475
+}
+256448832 .[#000000].> 1114428475 : ""
+rectangle 28892795722ADAPTER <<_GROUP>> {
+	rectangle "==adapters.Messaging\n<size:10>[component]</size>\n\nadapter component" <<ADAPTER>> as 1121295562
+}
+2889279572 .[#000000].> 1121295562 : ""
+3563315582 .[#000000].> 1114428475 : ""
+1339924498 .[#000000].> 1114428475 : ""
+1245755489 .[#000000].> 1114428475 : ""
+rectangle 11144284753DB <<_GROUP>> {
+	database "==Sqlite 3\n<size:10>[component]</size>\n\ndatabase component" <<DB>> as 2896215565
+}
+1114428475 .[#000000].> 2896215565 : ""
+@enduml

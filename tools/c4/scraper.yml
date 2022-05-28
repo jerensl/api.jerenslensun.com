@@ -1,8 +1,8 @@
 configuration:
   pkgs:
     - "github.com"
-    - "github.com/jmoiron/sqlx"
-
+    - "firebase.google.com/go/v4/messaging"
+    
 rules:
   - name_regexp: ".*"
     pkg_regexps:
@@ -32,6 +32,13 @@ rules:
       description: "application component"
       tags:
         - APP
+  - name_regexp: ".*"
+    pkg_regexps:
+      - ".*/domain/.*"
+    component:
+      description: "domain component"
+      tags:
+        - DOMAIN
   - name_regexp: ".*"
     pkg_regexps:
       - ".*/adapters"
