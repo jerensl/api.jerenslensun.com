@@ -17,7 +17,7 @@ func NewApplication(ctx context.Context) app.Application {
 	}
 
 	tokenRepository := adapters.NewSQLiteTokenRepository(db)
-	messageClient, err := adapters.NewFirebaseMessagingConnection()
+	messageClient, err := adapters.NewFirebaseMessagingConnection(ctx)
 	if err != nil {
 		panic(err)
 	}

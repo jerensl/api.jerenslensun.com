@@ -11,9 +11,8 @@ import (
 	"google.golang.org/api/option"
 )
 
-func NewFirebaseMessagingConnection() (*messaging.Client, error) {
+func NewFirebaseMessagingConnection(ctx context.Context) (*messaging.Client, error) {
 	var opts []option.ClientOption
-	ctx := context.Background()
 
 	if file := os.Getenv("SERVICE_ACCOUNT_FILE"); file != "" {
 		opts = append(opts, option.WithCredentialsFile(file))
@@ -36,7 +35,7 @@ type Messaging struct {
 	MessagingClient *messaging.Client
 }
 
-func (m *Messaging) SendNotification(token []string, title string, message string) error {
+func (m *Messaging) SendNotification(ctx context.Context,token []string, title string, message string) error {
 	if len(token) < 0 {
 		return errors.New("Unable to get token list")
 	}
@@ -54,7 +53,7 @@ func (m *Messaging) SendNotification(token []string, title string, message strin
 		Tokens: token,
 	}
 
-	_, err := m.MessagingClient.SendMulticast(context.Background(), notification)
+	_, err := m.MessagingClient.SendMulticast(ctx, notification)
 	if err != nil {
 		return errors.New("Unable to get send notification")
 	}

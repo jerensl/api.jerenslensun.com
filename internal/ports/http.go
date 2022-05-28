@@ -93,15 +93,13 @@ func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx := context.Background()
-
-	subscriber, err := h.app.Queries.GetAllSubscriber.Handle(ctx)
+	subscriber, err := h.app.Queries.GetAllSubscriber.Handle(r.Context())
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
 
-	h.app.Commands.SendNotification.Handle(subscriber, message.Title, message.Message)
+	h.app.Commands.SendNotification.Handle(r.Context(), subscriber, message.Title, message.Message)
 
 	w.WriteHeader(http.StatusOK)
 }

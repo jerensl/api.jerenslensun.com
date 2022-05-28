@@ -1,6 +1,8 @@
 package command
 
 import (
+	"context"
+
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
@@ -9,7 +11,7 @@ type SendNotificationHandler struct {
 }
 
 type SendNotificationReadModel interface {
-	SendNotification(token []string, title string, message string) error
+	SendNotification(ctx context.Context, token []string, title string, message string) error
 }
 
 
@@ -23,8 +25,8 @@ func NewSendNotificationHandler(tokenRepo SendNotificationReadModel) SendNotific
 	}
 }
 
-func (c SendNotificationHandler) Handle(listOfToken []string, title string, message string) (error) {
-	err := c.writeToModel.SendNotification(listOfToken, title, message)
+func (c SendNotificationHandler) Handle(ctx context.Context, listOfToken []string, title string, message string) (error) {
+	err := c.writeToModel.SendNotification(ctx, listOfToken, title, message)
 	if err != nil {
 		return errors.NewSlugError(err.Error(), "unable to send notifications")
 	}
