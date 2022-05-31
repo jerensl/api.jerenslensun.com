@@ -2,14 +2,18 @@ name: Test and coverage
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    types: [opened, synchronize]
+      types: [opened, synchronize]
+      branches:
+      - main
 
 jobs:
   test:
     environment: test
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v2
       with:
