@@ -19,6 +19,10 @@ jobs:
     - name: Retrieve the secret and decode it to a file
       run: |
         echo -n "${{ secrets.secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d > service-account-key.json
+
+    - name: cat service account key
+      run: cat service-account-key.json
+
     - uses: azure/docker-login@v1
       with:
         login-server: jerensl.azurecr.io
