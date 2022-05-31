@@ -16,6 +16,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Retrieve the secret and decode it to a file
+      env:
+        SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+      run: |
+        echo $SERVICE_ACCOUNT_KEY | base64 --decode > service-account-key.json
     - uses: azure/docker-login@v1
       with:
         login-server: mycontainer.azurecr.io
