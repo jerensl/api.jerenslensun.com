@@ -13,7 +13,7 @@ jobs:
   test:
     environment: test
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
       with:
@@ -36,5 +36,4 @@ jobs:
       working-directory: ./internal
       run: go test -race -coverprofile=coverage.out -covermode=atomic
     - name: Upload coverage to Codecov
-      working-directory: ./internal
       uses: codecov/codecov-action@v2
