@@ -1,36 +1,36 @@
 name: Test and coverage
 
 on:
-    push:
-        branches: [main]
-    pull_request:
-        types: [opened, synchronize]
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   test:
     environment: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-      - uses: actions/setup-go@v2
-        with:
-          go-version: '1.14'
-      - name: Retrieve the secret and decode it to a file
-        run: |
-          echo -n "${{ secrets.secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d > service-account-key.json
-      - name: Run coverage
-        env:
-          PORT: ${{ secrets.PORT }}
-          HTTP_ADDR: ${{ secrets.HTTP_ADDR }}
-          SQLITE_DB: ${{ secrets.SQLITE_DB }}
-          SERVICE_ACCOUNT_FILE: ${{ secrets.SERVICE_ACCOUNT_FILE }}
-          GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-          CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
-          API_KEY: ${{ secrets.API_KEY }}
-        working-directory: ./internal
-        run: go test -race -coverprofile=coverage.out -covermode=atomic
-      - name: Upload coverage to Codecov
-        working-directory: ./internal
-        uses: codecov/codecov-action@v2
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    - uses: actions/setup-go@v2
+      with:
+        go-version: '1.14'
+    - name: Retrieve the secret and decode it to a file
+      run: |
+        echo -n "${{ secrets.secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d > service-account-key.json
+    - name: Run coverage
+      env:
+        PORT: ${{ secrets.PORT }}
+        HTTP_ADDR: ${{ secrets.HTTP_ADDR }}
+        SQLITE_DB: ${{ secrets.SQLITE_DB }}
+        SERVICE_ACCOUNT_FILE: ${{ secrets.SERVICE_ACCOUNT_FILE }}
+        GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+        CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+        API_KEY: ${{ secrets.API_KEY }}
+      working-directory: ./internal
+      run: go test -race -coverprofile=coverage.out -covermode=atomic
+    - name: Upload coverage to Codecov
+      working-directory: ./internal
+      uses: codecov/codecov-action@v2
