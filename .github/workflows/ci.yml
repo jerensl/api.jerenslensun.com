@@ -23,7 +23,7 @@ jobs:
         go-version: '1.17'
     - name: Retrieve the secret and decode it to a file
       run: |
-        echo -n "${{ secrets.secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d > service-account-key.json
+        echo -n "${{ secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d > service-account-key.json
     - name: Run coverage
       env:
         PORT: ${{ secrets.PORT }}
