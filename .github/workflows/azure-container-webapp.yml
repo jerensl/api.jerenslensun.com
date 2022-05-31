@@ -21,7 +21,7 @@ jobs:
         echo -n "${{ secrets.secrets.SERVICE_ACCOUNT_KEY }}" | base64 -d > service-account-key.json
     - uses: azure/docker-login@v1
       with:
-        login-server: mycontainer.azurecr.io
+        login-server: jerensl.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
