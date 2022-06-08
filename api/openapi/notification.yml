@@ -24,6 +24,10 @@ paths:
       responses:
         '201':
           description: response subscribe from server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         default:
           description: unexpected error
           content:
@@ -45,6 +49,10 @@ paths:
       responses:
         '200':
           description: Response Unsubscribe from server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
         default:
           description: unexpected error
           content:

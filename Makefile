@@ -16,3 +16,7 @@ openapi_documentation:
 .PHONY: diagram_c4
 diagram_c4:
 	docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+
+.PHONY: key_generate
+key_generate:
+	base64 service-account-key.json > service-account-key.base64

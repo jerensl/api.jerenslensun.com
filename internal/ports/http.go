@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-chi/render"
 	"github.com/jerensl/api.jerenslensun.com/internal/app"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/httperr"
 )
@@ -35,7 +36,11 @@ func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
+	status := Status{
+		Status: true,
+	}
+
+	render.Respond(w, r, status)
 }
 
 func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
@@ -56,12 +61,8 @@ func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
 	status := Status{
 		Status: isSubscriber,
 	}
-	if err := json.NewEncoder(w).Encode(status); err != nil {
-		httperr.RespondWithSlugError(err, w, r)
-		return
-	}
 
-	w.WriteHeader(http.StatusOK)
+	render.Respond(w, r, status)
 }
 
 func (h HttpServer) UnsubscribeNotification(w http.ResponseWriter, r *http.Request) {
@@ -77,7 +78,11 @@ func (h HttpServer) UnsubscribeNotification(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	status := Status{
+		Status: false,
+	}
+
+	render.Respond(w, r, status)
 }
 
 func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
