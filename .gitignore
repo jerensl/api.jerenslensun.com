@@ -17,6 +17,9 @@
 # Sqlite db
 /database/db*
 
+# documentation
+/documentation
+
 # enviroment variable
 /service-account-*
 test.env
