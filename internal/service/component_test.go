@@ -82,6 +82,6 @@ func TestMain(m *testing.M) {
 	}
 
 	testCases := m.Run()
-	os.Remove("../../database/db.sqlite")
+	os.Remove(os.Getenv("SQLITE_DB"))
 	os.Exit(testCases)
 }
