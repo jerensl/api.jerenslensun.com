@@ -12,7 +12,7 @@ import (
 
 func TestMain(m *testing.M) {
 	testCases := m.Run()
-	os.Remove(os.Getenv("SQLITE_DB"))
+	os.Remove(os.Getenv("../../database/unit_test.sqlite"))
 	os.Exit(testCases)
 }
 
@@ -24,7 +24,7 @@ func newSqlLiteRepository(t *testing.T, dbPath string) *adapters.SQLiteTokenRepo
 }
 
 func TestRepository(t *testing.T) {
-	dbPath := os.Getenv("SQLITE_DB")
+	dbPath := os.Getenv("../../database/unit_test.sqlite")
 	r := newSqlLiteRepository(t, dbPath)
 
 	t.Run("Test Update token", func(t *testing.T) {
