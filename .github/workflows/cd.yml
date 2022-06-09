@@ -36,7 +36,7 @@ jobs:
         docker push jerensl.azurecr.io/jerens-web-api:${{ github.sha }}   
 
   deploy:
-    if: github.repository == 'jerensl/api.jerenslensun.com' && github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: github.repository == 'jerensl/api.jerenslensun.com' && github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     needs: build
 
