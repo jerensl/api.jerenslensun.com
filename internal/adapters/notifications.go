@@ -15,7 +15,7 @@ func NewFirebaseMessagingConnection(ctx context.Context) (*messaging.Client, err
 	var opts []option.ClientOption
 
 	if file := os.Getenv("SERVICE_ACCOUNT_FILE"); file != "" {
-		opts = append(opts, option.WithCredentialsFile(file))
+		opts = append(opts, option.WithCredentialsJSON([]byte(os.Getenv("SERVICE_ACCOUNT_STRING"))))
 	}
 	config := &firebase.Config{ProjectID: os.Getenv("GCP_PROJECT")}
 	firebaseApp, err := firebase.NewApp(context.Background(), config, opts...)

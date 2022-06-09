@@ -20,3 +20,7 @@ diagram_c4:
 .PHONY: key_generate
 key_generate:
 	base64 service-account-key.json > service-account-key.base64
+
+.PHONY: key_decoded
+key_decoded:
+	echo -n service-account-key.base64 | base64 -d -i > service-account.json
