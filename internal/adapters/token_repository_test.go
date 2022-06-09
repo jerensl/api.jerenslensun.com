@@ -18,7 +18,7 @@ func newSqlLiteRepository(t *testing.T, dbPath string) *adapters.SQLiteTokenRepo
 }
 
 func TestRepository(t *testing.T) {
-	dbPath := "../../database/db_test.sqlite"
+	dbPath := "../../database/db.test"
 	r := newSqlLiteRepository(t, dbPath)
 
 	t.Run("Test Update token", func(t *testing.T) {
