@@ -17,11 +17,8 @@
 # Sqlite db
 /database/db*
 
-/service-account-key.json
-/service-account-key.base64
-/service-account-*
-
 # enviroment variable
+/service-account-*
 test.env
 .env
 .envrc
