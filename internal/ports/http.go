@@ -39,7 +39,8 @@ func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request
 	status := Status{
 		Status: true,
 	}
-
+	
+	render.Status(r, http.StatusCreated)
 	render.Respond(w, r, status)
 }
 
