@@ -2,7 +2,6 @@ package adapters
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/pkg/errors"
 
@@ -13,7 +12,7 @@ import (
 func NewSQLiteConnection(file string) (*sqlx.DB, error) {
 	db, err := sqlx.Connect("sqlite3", file)
 	if err != nil {
-		return nil, errors.Wrap(err, fmt.Sprintf("cannot connect to sqlite, from: %v", file))
+		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
 
 	schema := `CREATE TABLE IF NOT EXISTS token (
