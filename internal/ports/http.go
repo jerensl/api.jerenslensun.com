@@ -1,7 +1,6 @@
 package ports
 
 import (
-	"context"
 	"encoding/json"
 	"net/http"
 	"os"
@@ -28,9 +27,7 @@ func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	ctx := context.Background()
-
-	err := h.app.Commands.AddNewSubscriber.Handle(ctx, newSubscriber.Token)
+	err := h.app.Commands.AddNewSubscriber.Handle(r.Context(), newSubscriber.Token)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
@@ -51,9 +48,7 @@ func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx := context.Background()
-
-	isSubscriber, err := h.app.Queries.GetStatusSubscriber.Handle(ctx, subscriber.Token)
+	isSubscriber, err := h.app.Queries.GetStatusSubscriber.Handle(r.Context(), subscriber.Token)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return

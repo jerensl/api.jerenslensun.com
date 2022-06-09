@@ -1,0 +1,299 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Fri Jun 10 06:49:31 2022
+
+# Variables
+
+# environment
+GO111MODULE = on
+# environment
+LC_ALL = C
+# environment
+LOG_LEVEL = debug
+# environment
+PULSE_SERVER = /mnt/wslg/PulseServer
+# environment
+STARSHIP_SESSION_KEY = 1721724997292901
+# environment
+WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
+# environment
+VSCODE_CWD = /mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code
+# environment
+DIRENV_WATCHES = eJx0zsFOxCAQgOF3mXPTgTLQ0rtHE-_Gw0Bn024obIBdTYzv7sWTxut_-b_XT3jhvsMKuJdT8CpVckt4q-UqsTfk2zH-RMntnsdYThwlP2qEAZ7L1o9TYNXO0uwWUm6Ap4-j9QZrr3f5Gv4ZjKlETth2roLbUSU_kFMq76imOVzEBxXMQrJY74O3RsgxWe0mcSKsvb0YItZKb5Y3E4OnKToT1bz8ZXlNv1lv3wEAAP__iypPhg==
+# default
+MAKE_COMMAND := make
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# environment
+GOPATH = /home/jerensl/go
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+CORS_ALLOWED_ORIGINS = http://localhost:3000;https://jerenslensun.com
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/jerensl/projects/api.jerenslensun.com
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+LANG = C
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# environment
+API_KEY = jerensl73934
+# makefile
+CURDIR := /home/jerensl/projects/api.jerenslensun.com
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+HTTP_ADDR = localhost:5000
+# environment
+PORT = 5000
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+WAYLAND_DISPLAY = wayland-0
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+WT_PROFILE_ID = {a5a97cb8-8961-5535-816d-772efe0c6a3f}
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 3
+# environment
+GCP_PROJECT = jerens-app
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/jerensl/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+SQLITE_DB = ../../database/db.test.sqlite
+# environment
+SERVICE_ACCOUNT_FILE = ../../service-account-key.json
+# environment
+WT_SESSION = e31e8b29-02b8-4594-8c3e-f24278382524
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+LOCAL_ENV = true
+# automatic
+?F = $(notdir $?)
+# environment
+NAME = Code
+# environment
+HOSTTYPE = x86_64
+# automatic
++F = $(notdir $+)
+# environment
+WSL_INTEROP = /run/WSL/9_interop
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+DIRENV_FILE = /home/jerensl/projects/api.jerenslensun.com/.envrc
+# environment
+LOGNAME = jerensl
+# environment
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/jeren/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
+# makefile
+.DEFAULT_GOAL := openapi_http
+# environment
+DISPLAY = :0
+# environment
+USER = jerensl
+# default
+MAKE_VERSION := 4.3
+# environment
+DIRENV_DIR = -/home/jerensl/projects/api.jerenslensun.com
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+STARSHIP_SHELL = fish
+# environment
+_ = /usr/sbin/make
+# environment
+XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
+# environment
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-c615f0c3-09f5-4eb7-bf21-2dd55a522e52.sock
+# environment
+DIRENV_DIFF = eJyUkctyqkwURt9lj7l0hMSEvzJAbBVFG7G94KQLsCMqN-kGjam8-1-eymV0Bme661uratf6gAqsj08FCrA-wPZdNsEhWHDkNS9E1jVeDBMUcEiwYLbnkTXuMxK4Q3e2AAtSKStL17MyibK0FNIyEEL_3a_C0vUvBy9EU2hJmYMCfTfAsxXruwFYoOppmfPvmV7V5ZEnUuhRddD-zg5cD4MF_8DqGi_aOvlVrG3qjPD9AT6-opsYkKtjz_dkYOQbn-6pN0e1HGGVDS-oV6COWcZub0fDW9sVa3ptJFNjtqHGMW3FdNKMd_TZqVbJSZpndXkW9O3UuY3UYFrIQuxCml4yv3PG9rbrPZQvNJxtCGou62X-ZFemenyZb-vaeHsctub2OMkwlWmnLr14uViy02B67j4dcrK64d51M53X47BrEiMQ--uaozxZTEQbo9CV20n8GBrYJMWElvQhvj1vN9msfcha44Jt22fs8F756f71FRQYOj7zAzLGDv1prUZVBQqMKPWZ3e_fA_12fUQIgQIecWyP4dkKLJB1w_-chszDK-yBBTseN3tQwCfB3fsFLXCwch3MbMchyxn9DqhpuqbpgtftIeFqlCRlU0j1xN-1oyiLOzf3XIpZv_cz3kUyiiPB9V2sSS6kJs7ZQXL4_Pw_AAD__4s55T8=
+# environment
+GOMODCACHE = /home/jerensl/go/pkg/mod
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/jerensl
+# environment
+TERM = xterm-256color
+# environment
+GOPROXY = https://proxy.golang.org,direct
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+WSL_DISTRO_NAME = Arch
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
+# variable set hash-table stats:
+# Load=88/1024=9%, Rehash=0, Collisions=2/118=2%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 2080, inode 53858): 25 files, no impossibilities.
+
+# 25 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+key_generate:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 22):
+	base64 service-account-key.json > service-account-key.base64
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-09 11:24:20.938716
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+openapi_http:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 3):
+	oapi-codegen -generate types -o internal/ports/openapi_types.gen.go -package ports api/openapi/notification.yml
+	oapi-codegen -generate chi-server -o internal/ports/openapi.gen.go -package ports api/openapi/notification.yml
+	oapi-codegen -generate types -o internal/tests/client/openapi_types.gen.go -package client api/openapi/notification.yml
+	oapi-codegen -generate client -o internal/tests/client/openapi_client.gen.go -package client api/openapi/notification.yml
+
+openapi_documentation:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 10):
+	docker run --rm \
+  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+  -i /local/api/openapi/notification.yml \
+  -g html2 \
+  -o /local/documentation/openapi
+
+key_decoded:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 26):
+	echo -n service-account-key.base64 | base64 -d -i > service-account.json
+
+diagram_c4:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 18):
+	docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+
+.PHONY: openapi_http openapi_documentation diagram_c4 key_generate key_decoded
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=10/1024=1%, Rehash=0, Collisions=0/34=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+ 
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 36 / storage = 383 B / avg = 10 B
+# current buf: size = 8162 B / used = 383 B / count = 36 / avg = 10 B
+
+# strcache performance: lookups = 59 / hit rate = 38%
+# hash-table stats:
+# Load=36/8192=0%, Rehash=0, Collisions=0/59=0%
+# Finished Make data base on Fri Jun 10 06:49:31 2022
+
+ 
