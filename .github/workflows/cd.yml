@@ -17,15 +17,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: microsoft/variable-substitution@v1 
-    with:
-        files: 'service-account.json'
-    env:
-        project_id: ${{ secrets.PROJECT_ID }}
-        private_key: ${{ secrets.PRIVATE_KEY }}
-        private_key_id: ${{ secrets.PRIVATE_KEY_ID }}
-        client_email: ${{ secrets.CLIENT_EMAIL }}
-        client_id: ${{ secrets.CLIENT_ID }}
-        client_x509_cert_url: ${{ secrets.CLIENT_X509_CERT_URL }}
+      with:
+          files: 'service-account.json'
+      env:
+          project_id: ${{ secrets.PROJECT_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+          private_key_id: ${{ secrets.PRIVATE_KEY_ID }}
+          client_email: ${{ secrets.CLIENT_EMAIL }}
+          client_id: ${{ secrets.CLIENT_ID }}
+          client_x509_cert_url: ${{ secrets.CLIENT_X509_CERT_URL }}
     - uses: azure/docker-login@v1
       with:
         login-server: jerensl.azurecr.io
