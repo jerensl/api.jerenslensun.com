@@ -15,7 +15,7 @@
 # vendor/
 
 # Sqlite db
-/database/sqlite.db
+/database/db*
 
 /service-account-key.json
 /service-account-key.base64
