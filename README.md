@@ -7,6 +7,11 @@ This Restful Api is notification api for my [personal web app](https://www.jeren
 ### Api Documentation
 This api documentation is available [here](https://www.jerenslensun.com/project/notification-api)
 
+### Development
+```
+go run main.go
+```
+
 ### Technology Used
 - Golang
 - Open Api 3.0
