@@ -477,6 +477,7 @@ func (r SubscriberStatusResponse) StatusCode() int {
 type SubscribeNotificationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+	JSON201      *Status
 	JSONDefault  *Error
 }
 
@@ -499,6 +500,7 @@ func (r SubscribeNotificationResponse) StatusCode() int {
 type UnsubscribeNotificationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+	JSON200      *Status
 	JSONDefault  *Error
 }
 
@@ -659,6 +661,13 @@ func ParseSubscribeNotificationResponse(rsp *http.Response) (*SubscribeNotificat
 	}
 
 	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest Status
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
 		var dest Error
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
@@ -685,6 +694,13 @@ func ParseUnsubscribeNotificationResponse(rsp *http.Response) (*UnsubscribeNotif
 	}
 
 	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Status
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
 		var dest Error
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {

@@ -13,8 +13,6 @@ FROM scratch
 WORKDIR /app/
 COPY --from=builder /main /main
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY service-account-key.json ./
-ENV SERVICE_ACCOUNT_FILE "./service-account-key.json"
 ENV GCP_PROJECT "jerens-app"
 ENV SQLITE_DB "./sqlite.db"
 ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com"

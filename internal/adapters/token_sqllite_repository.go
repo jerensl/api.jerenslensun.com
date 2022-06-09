@@ -32,7 +32,10 @@ type SQLiteTokenRepository struct {
 }
 
 func NewSQLiteTokenRepository(db *sqlx.DB) *SQLiteTokenRepository  {
-
+	if db == nil {
+		panic("missing database")
+	} 
+	
 	return &SQLiteTokenRepository{
 		db: db,
 	}

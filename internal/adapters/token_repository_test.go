@@ -10,6 +10,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestMain(m *testing.M) {
+	testCases := m.Run()
+	os.Remove(os.Getenv("SQLITE_DB"))
+	os.Exit(testCases)
+}
+
 func newSqlLiteRepository(t *testing.T, dbPath string) *adapters.SQLiteTokenRepository {
 	db, err := adapters.NewSQLiteConnection(dbPath)
 	require.NoError(t, err)
@@ -18,7 +24,7 @@ func newSqlLiteRepository(t *testing.T, dbPath string) *adapters.SQLiteTokenRepo
 }
 
 func TestRepository(t *testing.T) {
-	dbPath := "../../database/db_test.sqlite"
+	dbPath := os.Getenv("SQLITE_DB")
 	r := newSqlLiteRepository(t, dbPath)
 
 	t.Run("Test Update token", func(t *testing.T) {
