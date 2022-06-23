@@ -16,16 +16,15 @@ func TestMain(m *testing.M) {
 	os.Exit(testCases)
 }
 
-func newSqlLiteRepository(t *testing.T, dbPath string) *adapters.SQLiteTokenRepository {
-	db, err := adapters.NewSQLiteConnection(dbPath)
+func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
+	db, err := adapters.NewSQLiteConnection()
 	require.NoError(t, err)
 
 	return adapters.NewSQLiteTokenRepository(db)
 }
 
 func TestRepository(t *testing.T) {
-	dbPath := os.Getenv("../../database/unit_test.sqlite")
-	r := newSqlLiteRepository(t, dbPath)
+	r := newSqlLiteRepository(t)
 
 	t.Run("Test Update token", func(t *testing.T) {
 		testUpdatedToken(t, r)
@@ -47,7 +46,7 @@ func TestRepository(t *testing.T) {
 		testGetAll2Token(t, r)
 	})
 
-	err := os.Remove(dbPath)
+	err := os.Remove("../../database/unit_test.sqlite")
 	if err != nil {
 		fmt.Println("cannot remove database")
 	}

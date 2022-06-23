@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jun 10 06:49:31 2022
+# Make data base, printed on Fri Jun 10 15:10:17 2022
 
 # Variables
 
@@ -21,7 +21,7 @@ LOG_LEVEL = debug
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-STARSHIP_SESSION_KEY = 1721724997292901
+STARSHIP_SESSION_KEY = 2625534132072622
 # environment
 WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
 # environment
@@ -67,7 +67,7 @@ CURDIR := /home/jerensl/projects/api.jerenslensun.com
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -113,7 +113,7 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/jerensl/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
+PATH = /home/jerensl/.vscode-server/bin/4af164ea3a06f701fe3e89a2bcbb421d2026b68f/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
 # default
 MAKEFILES := 
 # automatic
@@ -123,7 +123,7 @@ SQLITE_DB = ../../database/db.test.sqlite
 # environment
 SERVICE_ACCOUNT_FILE = ../../service-account-key.json
 # environment
-WT_SESSION = e31e8b29-02b8-4594-8c3e-f24278382524
+WT_SESSION = 4e40fec3-8b51-4d52-af8b-2be02f438077
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -165,7 +165,7 @@ _ = /usr/sbin/make
 # environment
 XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-c615f0c3-09f5-4eb7-bf21-2dd55a522e52.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-40fc3f9e-80c9-4598-9a6a-25dba51802a5.sock
 # environment
 DIRENV_DIFF = eJyUkctyqkwURt9lj7l0hMSEvzJAbBVFG7G94KQLsCMqN-kGjam8-1-eymV0Bme661uratf6gAqsj08FCrA-wPZdNsEhWHDkNS9E1jVeDBMUcEiwYLbnkTXuMxK4Q3e2AAtSKStL17MyibK0FNIyEEL_3a_C0vUvBy9EU2hJmYMCfTfAsxXruwFYoOppmfPvmV7V5ZEnUuhRddD-zg5cD4MF_8DqGi_aOvlVrG3qjPD9AT6-opsYkKtjz_dkYOQbn-6pN0e1HGGVDS-oV6COWcZub0fDW9sVa3ptJFNjtqHGMW3FdNKMd_TZqVbJSZpndXkW9O3UuY3UYFrIQuxCml4yv3PG9rbrPZQvNJxtCGou62X-ZFemenyZb-vaeHsctub2OMkwlWmnLr14uViy02B67j4dcrK64d51M53X47BrEiMQ--uaozxZTEQbo9CV20n8GBrYJMWElvQhvj1vN9msfcha44Jt22fs8F756f71FRQYOj7zAzLGDv1prUZVBQqMKPWZ3e_fA_12fUQIgQIecWyP4dkKLJB1w_-chszDK-yBBTseN3tQwCfB3fsFLXCwch3MbMchyxn9DqhpuqbpgtftIeFqlCRlU0j1xN-1oyiLOzf3XIpZv_cz3kUyiiPB9V2sSS6kJs7ZQXL4_Pw_AAD__4s55T8=
 # environment
@@ -197,9 +197,9 @@ WSL_DISTRO_NAME = Arch
 
 # Directories
 
-# . (device 2080, inode 53858): 25 files, no impossibilities.
+# . (device 2080, inode 53858): 24 files, no impossibilities.
 
-# 25 files, no impossibilities in 1 directories.
+# 24 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -285,15 +285,14 @@ diagram_c4:
 
 # No 'vpath' search paths.
 
- 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 36 / storage = 383 B / avg = 10 B
-# current buf: size = 8162 B / used = 383 B / count = 36 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 35 / storage = 369 B / avg = 10 B
+# current buf: size = 8162 B / used = 369 B / count = 35 / avg = 10 B
 
-# strcache performance: lookups = 59 / hit rate = 38%
+# strcache performance: lookups = 58 / hit rate = 39%
 # hash-table stats:
-# Load=36/8192=0%, Rehash=0, Collisions=0/59=0%
-# Finished Make data base on Fri Jun 10 06:49:31 2022
+# Load=35/8192=0%, Rehash=0, Collisions=0/58=0%
+# Finished Make data base on Fri Jun 10 15:10:17 2022
 
  

@@ -13,14 +13,6 @@ openapi_documentation:
   -g html2 \
   -o /local/documentation/openapi
 
-.PHONY: diagram_c4
-diagram_c4:
+.PHONY: plantuml_up
+plantuml_up:
 	docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
-
-.PHONY: key_generate
-key_generate:
-	base64 service-account-key.json > service-account-key.base64
-
-.PHONY: key_decoded
-key_decoded:
-	echo -n service-account-key.base64 | base64 -d -i > service-account.json

@@ -28,3 +28,4 @@ test.env
 
 # vs code workspace
 *.code-workspace
+.vscode
