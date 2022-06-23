@@ -53,24 +53,14 @@ skinparam database<<DB>> {
 }
 
 rectangle 0ROOT <<_GROUP>> {
+	rectangle "==app.Commands\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 2640234945
+}
+rectangle 0ROOT <<_GROUP>> {
 	rectangle "==app.Application\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 3014183467
 }
 rectangle 0ROOT <<_GROUP>> {
 	rectangle "==app.Queries\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 1654094325
 }
-rectangle 0ROOT <<_GROUP>> {
-	rectangle "==app.Commands\n<size:10>[component]</size>\n\napplication context" <<ROOT>> as 2640234945
-}
-3014183467 .[#000000].> 2640234945 : ""
-3014183467 .[#000000].> 1654094325 : ""
-rectangle 16540943251APP <<_GROUP>> {
-	rectangle "==query.GetStatusSubscriberHandler\n<size:10>[component]</size>\n\napplication query" <<APP>> as 1339924498
-}
-1654094325 .[#000000].> 1339924498 : ""
-rectangle 16540943251APP <<_GROUP>> {
-	rectangle "==query.GetAllSubscriberHandler\n<size:10>[component]</size>\n\napplication query" <<APP>> as 1245755489
-}
-1654094325 .[#000000].> 1245755489 : ""
 rectangle 26402349451APP <<_GROUP>> {
 	rectangle "==command.AddNewSubscriberHandler\n<size:10>[component]</size>\n\napplication command" <<APP>> as 256448832
 }
@@ -83,10 +73,19 @@ rectangle 26402349451APP <<_GROUP>> {
 	rectangle "==command.UnsubscribeHandler\n<size:10>[component]</size>\n\napplication command" <<APP>> as 3563315582
 }
 2640234945 .[#000000].> 3563315582 : ""
-rectangle 12457554892ADAPTER <<_GROUP>> {
+3014183467 .[#000000].> 2640234945 : ""
+3014183467 .[#000000].> 1654094325 : ""
+rectangle 16540943251APP <<_GROUP>> {
+	rectangle "==query.GetStatusSubscriberHandler\n<size:10>[component]</size>\n\napplication query" <<APP>> as 1339924498
+}
+1654094325 .[#000000].> 1339924498 : ""
+rectangle 16540943251APP <<_GROUP>> {
+	rectangle "==query.GetAllSubscriberHandler\n<size:10>[component]</size>\n\napplication query" <<APP>> as 1245755489
+}
+1654094325 .[#000000].> 1245755489 : ""
+rectangle 2564488322ADAPTER <<_GROUP>> {
 	rectangle "==adapters.SQLiteTokenRepository\n<size:10>[component]</size>\n\nadapter component" <<ADAPTER>> as 1114428475
 }
-1245755489 .[#000000].> 1114428475 : ""
 256448832 .[#000000].> 1114428475 : ""
 rectangle 28892795722ADAPTER <<_GROUP>> {
 	rectangle "==adapters.Messaging\n<size:10>[component]</size>\n\nadapter component" <<ADAPTER>> as 1121295562
@@ -94,6 +93,7 @@ rectangle 28892795722ADAPTER <<_GROUP>> {
 2889279572 .[#000000].> 1121295562 : ""
 3563315582 .[#000000].> 1114428475 : ""
 1339924498 .[#000000].> 1114428475 : ""
+1245755489 .[#000000].> 1114428475 : ""
 rectangle 11144284753DB <<_GROUP>> {
 	database "==Sqlite 3\n<size:10>[component]</size>\n\ndatabase component" <<DB>> as 2896215565
 }

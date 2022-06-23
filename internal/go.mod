@@ -1,6 +1,6 @@
 module github.com/jerensl/api.jerenslensun.com/internal
 
-go 1.17
+go 1.18
 
 require (
 	firebase.google.com/go/v4 v4.7.1

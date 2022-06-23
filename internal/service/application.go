@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"os"
 
 	"github.com/jerensl/api.jerenslensun.com/internal/adapters"
 	"github.com/jerensl/api.jerenslensun.com/internal/app"
@@ -11,7 +10,7 @@ import (
 )
 
 func NewApplication(ctx context.Context) app.Application {
-	db, err := adapters.NewSQLiteConnection(os.Getenv("SQLITE_DB"))
+	db, err := adapters.NewSQLiteConnection()
 	if err != nil {
 		panic(err)
 	}
