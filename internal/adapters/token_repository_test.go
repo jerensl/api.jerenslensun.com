@@ -34,12 +34,20 @@ func TestRepository(t *testing.T) {
 		testGetToken(t, r)
 	})
 
+	t.Run("Test Get token Not Exist", func(t *testing.T) {
+		testGetTokenNotExist(t, r)
+	})
+
 	t.Run("Test Get All token", func(t *testing.T) {
 		testGetAllToken(t, r)
 	})
 
 	t.Run("Test Delete token", func(t *testing.T) {
 		testDeleteToken(t, r)
+	})
+
+	t.Run("Test Delete Token Not Exist", func(t *testing.T) {
+		testDeleteTokenNotExist(t, r)
 	})
 
 	t.Run("Test Get All token", func(t *testing.T) {
@@ -66,6 +74,13 @@ func testGetToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	assert.True(t, hasValue)
 }
 
+func testGetTokenNotExist(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	hasValue, err := repository.GetToken("abc1233")
+	require.NoError(t, err)
+
+	assert.False(t, hasValue)
+}
+
 func testGetAllToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	expected := []string{"abc123", "abc321"}
 
@@ -87,4 +102,9 @@ func testGetAll2Token(t *testing.T, repository *adapters.SQLiteTokenRepository) 
 func testDeleteToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	err := repository.DeleteToken("abc123")
 	require.NoError(t, err)
+}
+
+func testDeleteTokenNotExist(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	err := repository.DeleteToken("abc1232")
+	require.ErrorContains(t, err, "Cannot find token from database")
 }
