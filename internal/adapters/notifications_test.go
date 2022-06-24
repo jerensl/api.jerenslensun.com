@@ -26,3 +26,16 @@ func TestSendMesageOnFCM(t *testing.T) {
 	err = msg.SendNotification(ctx, []string{"abc"}, "Test Title Message", "Test Body Message")
 	assert.NoError(t, err, "Message cannot be send")
 }
+
+func TestSendMesageOnFCMWithZeroToken(t *testing.T) {
+	ctx := context.Background()
+	fcm, err := adapters.NewFirebaseMessagingConnection(ctx)
+	assert.NoError(t, err, "cannot connect to FCM")
+
+	msg := adapters.Messaging{
+		MessagingClient: fcm,
+	}
+
+	err = msg.SendNotification(ctx, []string{}, "Test Title Message", "Test Body Message")
+	assert.ErrorContains(t, err, "Unable to get token list")
+}

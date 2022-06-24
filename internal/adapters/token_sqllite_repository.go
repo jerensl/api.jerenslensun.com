@@ -25,7 +25,7 @@ func NewSQLiteConnection() (*sqlx.DB, error) {
 
 	_, err = db.Exec(schema)
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot connect to sqlite")
+		return nil, errors.Wrap(err, "cannot execute schema to sqlite")
 	}
 
 	return	db, nil

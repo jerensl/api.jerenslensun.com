@@ -36,7 +36,7 @@ type Messaging struct {
 }
 
 func (m *Messaging) SendNotification(ctx context.Context,token []string, title string, message string) error {
-	if len(token) < 0 {
+	if len(token) < 1 {
 		return errors.New("Unable to get token list")
 	}
 
