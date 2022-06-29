@@ -16,6 +16,7 @@ func TestMain(m *testing.M) {
 	os.Exit(testCases)
 }
 
+
 func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
 	db, err := adapters.NewSQLiteConnection()
 	require.NoError(t, err)
@@ -26,8 +27,12 @@ func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
 func TestRepository(t *testing.T) {
 	r := newSqlLiteRepository(t)
 
-	t.Run("Test Update token", func(t *testing.T) {
-		testUpdatedToken(t, r)
+	t.Run("Test Insert token", func(t *testing.T) {
+		testInsertToken(t, r)
+	})
+
+	t.Run("Test Insert Existing token", func(t *testing.T) {
+		testInsertExistingToken(t, r)
 	})
 
 	t.Run("Test Get token", func(t *testing.T) {
@@ -50,8 +55,8 @@ func TestRepository(t *testing.T) {
 		testDeleteTokenNotExist(t, r)
 	})
 
-	t.Run("Test Get All token", func(t *testing.T) {
-		testGetAll2Token(t, r)
+	t.Run("Test Get All token After Delete One", func(t *testing.T) {
+		testGetAllTokenAfterDeleteOne(t, r)
 	})
 
 	err := os.Remove("../../database/unit_test.sqlite")
@@ -60,11 +65,16 @@ func TestRepository(t *testing.T) {
 	}
 }
 
-func testUpdatedToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+func testInsertToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	err := repository.UpdatedToken("abc123")
 	require.NoError(t, err)
 	err = repository.UpdatedToken("abc321")
 	require.NoError(t, err)
+}
+
+func testInsertExistingToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	err := repository.UpdatedToken("abc123")
+	require.ErrorContains(t, err, "Unable to insert token to database")
 }
 
 func testGetToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
@@ -90,7 +100,7 @@ func testGetAllToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	assert.Equal(t, expected,subscriber)
 }
 
-func testGetAll2Token(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+func testGetAllTokenAfterDeleteOne(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	expected := []string{"abc321"}
 
 	subscriber, err := repository.GetAllToken()

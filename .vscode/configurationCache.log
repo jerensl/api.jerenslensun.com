@@ -1,1 +1,1 @@
-{"buildTargets":["diagram_c4","key_decoded","key_generate","openapi_documentation","openapi_http"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
+{"buildTargets":["openapi_documentation","openapi_http","plantuml_up"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}

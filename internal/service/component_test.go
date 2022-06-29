@@ -43,6 +43,22 @@ func TestGetStatusAlreadySubscriber(t *testing.T) {
 	client.AlreadySubscriberStatus(t, token)
 }
 
+func TestSendNotification(t *testing.T) {
+	client := tests.NewHttpClient(t)
+	title := "Test title"
+	message := "Test Message"
+
+	client.SendNotification(t, title, message)
+}
+
+func TestSendNotificationWithouAutz(t *testing.T) {
+	client := tests.NewHttpClient(t)
+	title := "Test title"
+	message := "Test Message"
+
+	client.SendNotificationWithoutAuthz(t, title, message)
+}
+
 func TestUnsubscribeNotification(t *testing.T) {
 	client := tests.NewHttpClient(t)
 	token := "abc"
