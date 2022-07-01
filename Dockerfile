@@ -1,7 +1,6 @@
 # syntax=docker/dockerfile:1
 
 FROM golang:1.18 AS builder
-
 WORKDIR /app/
 COPY /internal/go.mod ./
 COPY /internal/go.sum ./
@@ -13,7 +12,7 @@ FROM scratch
 WORKDIR /app/
 COPY --from=builder /main /main
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY internal/docs/ /docs/
+COPY --from=builder /app/docs/ /app/docs/
 COPY service-account.json ./
 ENV SERVICE_ACCOUNT_FILE "./service-account.json"
 ENV PROJECT_ID "jerens-app"
