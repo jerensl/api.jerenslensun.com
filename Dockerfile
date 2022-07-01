@@ -12,6 +12,7 @@ RUN CGO_ENABLED=1 GOOS=linux go build -o /main -a -ldflags '-linkmode external -
 FROM scratch
 WORKDIR /app/
 COPY --from=builder /main /main
+COPY --from=builder /docs /docs
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY service-account.json ./
 ENV SERVICE_ACCOUNT_FILE "./service-account.json"

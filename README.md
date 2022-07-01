@@ -30,6 +30,12 @@ Go to internal folder in the project directory
   cd api.jerenslensun.com/internal
 ```
 
+Install dependencies
+
+```bash
+  go mod download
+```
+
 Start the server
 
 ```bash
@@ -54,5 +60,5 @@ Start the server
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/jerensl/api.jerenslensun.com/blob/main/LICENSE)
 
