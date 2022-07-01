@@ -4,10 +4,12 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
+	"github.com/go-chi/httprate"
 	"github.com/sirupsen/logrus"
 
 	"github.com/jerensl/api.jerenslensun.com/internal/logs"
@@ -25,6 +27,8 @@ func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http
 
 	rootRouter.Mount("/api", createHandler(apiRouter))
 
+	rootRouter.Mount("/docs", http.StripPrefix("/docs", http.FileServer(http.Dir("./docs"))))
+	
 	logrus.Info("Starting RESTFull Api server on Port "+os.Getenv("PORT"))
 
 	_ = http.ListenAndServe(addr, rootRouter)
@@ -34,6 +38,7 @@ func setMiddlewares(router *chi.Mux)  {
 	router.Use(middleware.RequestID)
 	router.Use(middleware.RealIP)
 	router.Use(logs.NewStructuredLogger(logrus.StandardLogger()))
+	router.Use(httprate.LimitByIP(60, 1*time.Minute))
 	router.Use(middleware.Recoverer)
 
 	addCorsMiddleware(router)

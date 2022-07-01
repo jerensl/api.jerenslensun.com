@@ -11,7 +11,7 @@ openapi_documentation:
   -v ${PWD}:/local openapitools/openapi-generator-cli generate \
   -i /local/api/openapi/notification.yml \
   -g html2 \
-  -o /local/documentation/openapi
+  -o /local/internal/docs
 
 .PHONY: plantuml_up
 plantuml_up:

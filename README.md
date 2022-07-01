@@ -4,20 +4,55 @@
 
 This Restful Api is notification api for my [personal web app](https://www.jerenslensun.com/)
 
-### Api Documentation
-This api documentation is available [here](https://www.jerenslensun.com/project/notification-api)
+## Environment Variables
 
-### Development
+To run this project, you will need to add the following environment variables to your .env file
+
+`SERVICE_ACCOUNT_FILE`: Firebase service account
+
+`API_KEY`: Api key header token for authorization
+
+`CORS_ALLOWED_ORIGINS`
+
+`SQLITE_DB`: Sqlite Database file location
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/jerensl/api.jerenslensun.com.git
 ```
-go run main.go
+
+Go to internal folder in the project directory
+
+```bash
+  cd api.jerenslensun.com/internal
 ```
 
-### Technology Used
-- Golang
-- Open Api 3.0
-- Sqlite
-- Firebase Mesagging
-- Docker
+Start the server
 
-### C4 Diagram
+```bash
+  go run main.go
+```
+
+
+## Features
+
+- Status Notification
+- Subscribe Notification
+- Unsubscribe Notification
+- Send Notification
+
+## Documentation
+
+[Documentation](https://api.jerenslensun.com/docs)
+
+## C4 Diagram
+
 ![C4 Diagram](/tools/c4/out/view-notification.png)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+

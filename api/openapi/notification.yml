@@ -2,7 +2,7 @@ openapi: "3.0.0"
 info:
   version: 1.0.0
   title: Jerens Web App
-  description: RESTful Api for notification personal web
+  description: RESTful Api for supporting jerens web app
   contact:
     name: Jerens Lensun
     url: https://www.jerenslensun.com/
@@ -15,7 +15,7 @@ paths:
       summary: Subscribe to notification
       operationId: subscribeNotification
       requestBody:
-        description: sending new push notification token to subscribe from client
+        description: Sending new push notification token to subscribe from a client
         required: true
         content:
           application/json:
@@ -40,7 +40,7 @@ paths:
       summary: Unsubscribe to notification
       operationId: unsubscribeNotification
       requestBody:
-        description: sending push notification Token to unsubscribe from server
+        description: Sending push notification Token to unsubscribe from server
         required: true
         content:
           application/json:
@@ -65,7 +65,7 @@ paths:
       summary: Subscriber Status
       operationId: subscriberStatus
       requestBody:
-        description: sending push notification Token to get status from server
+        description: Sending push notification Token to get status from server
         required: true
         content:
           application/json:
@@ -90,7 +90,7 @@ paths:
       summary: Send notification to all subscriber
       operationId: sendNotification
       requestBody:
-        description: sending push notification message to all subscribers from server
+        description: Sending push notification message to all subscribers from server
         required: true
         content:
           application/json:
@@ -116,7 +116,7 @@ components:
       properties:
         token:
           type: string
-          example: "abc123"
+          example: "secret123"
           description: Client Token
     Status:
       required:
