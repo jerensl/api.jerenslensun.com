@@ -27,8 +27,8 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t jerensl.azurecr.io/jerens-web-api:${{ github.sha }}
-        docker push jerensl.azurecr.io/jerens-web-api:${{ github.sha }}   
+        docker build -f docker/app-prod -t jerensl.azurecr.io/jerens-web-api:${{ github.sha }}
+        docker push jerensl.azurecr.io/jerens-web-api:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest

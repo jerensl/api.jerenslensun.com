@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  jerens-web-api:
+    build:
+      context: docker/app-dev
+      dockerfile: Dockerfile
+    volumes:
+      - ./internal:/internal
+      - ./service-account-key.json:$SERVICE_ACCOUNT_FILE
+      - ./database:/database
+    working_dir: /internal
+    ports:
+      - "127.0.0.1:5000:$PORT"
+    env_file:
+      - .env
