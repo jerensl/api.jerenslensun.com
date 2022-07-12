@@ -1,15 +1,15 @@
 package command
 
 import (
-	"github.com/jerensl/api.jerenslensun.com/internal/domain"
+	"github.com/jerensl/api.jerenslensun.com/internal/domain/notification"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type UnsubscribeHandler struct {
-	tokenRepo domain.Repository
+	tokenRepo notification.Repository
 }
 
-func NewUnsubscribe(tokenRepo domain.Repository) UnsubscribeHandler {
+func NewUnsubscribe(tokenRepo notification.Repository) UnsubscribeHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}
@@ -19,11 +19,11 @@ func NewUnsubscribe(tokenRepo domain.Repository) UnsubscribeHandler {
 	}
 }
 
-func (u UnsubscribeHandler) Handle(token string) error {
-	err := u.tokenRepo.DeleteToken(token)
+func (u UnsubscribeHandler) Handle(tokenID string, updateAt int64) (*notification.Token, error) {
+	token, err := u.tokenRepo.UpdatedToken(tokenID, updateAt)
 	if err != nil {
-		return errors.NewSlugError(err.Error(), "unable to unsubscribe")
+		return token, errors.NewSlugError(err.Error(), "unable to unsubscribe")
 	}
 	
-	return nil
+	return token, nil
 }

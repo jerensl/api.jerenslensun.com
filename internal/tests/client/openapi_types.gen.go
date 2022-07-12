@@ -25,13 +25,19 @@ type Message struct {
 // Status defines model for Status.
 type Status struct {
 	// Subscriber status
-	Status bool `json:"status"`
+	IsActive bool `json:"isActive"`
+
+	// Last updated date
+	UpdatedAt int64 `json:"updatedAt"`
 }
 
 // Subscriber defines model for Subscriber.
 type Subscriber struct {
 	// Client Token
-	Token string `json:"token"`
+	TokenID string `json:"tokenID"`
+
+	// Last updated date
+	UpdatedAt int64 `json:"updatedAt"`
 }
 
 // SendNotificationJSONBody defines parameters for SendNotification.

@@ -874,22 +874,34 @@ ul.nav-tabs {
   }
 };
     defs["Status"] = {
-  "required" : [ "status" ],
+  "required" : [ "isActive", "updatedAt" ],
   "properties" : {
-    "status" : {
+    "isActive" : {
       "type" : "boolean",
       "description" : "Subscriber status",
       "example" : false
+    },
+    "updatedAt" : {
+      "type" : "integer",
+      "description" : "Last updated date",
+      "format" : "int64",
+      "example" : 1657514549
     }
   }
 };
     defs["Subscriber"] = {
-  "required" : [ "token" ],
+  "required" : [ "tokenID", "updatedAt" ],
   "properties" : {
-    "token" : {
+    "tokenID" : {
       "type" : "string",
       "description" : "Client Token",
-      "example" : "abc123"
+      "example" : "secret123"
+    },
+    "updatedAt" : {
+      "type" : "integer",
+      "description" : "Last updated date",
+      "format" : "int64",
+      "example" : 1657514549
     }
   }
 };
@@ -940,7 +952,7 @@ ul.nav-tabs {
               <div class="app-desc">Version: 1.0.0</div>
             <hr>
             <div id="app-description" class="app-desc">
-                RESTful Api for notification personal web
+                RESTful Api for supporting jerens web app
             </div>
           </div>
         </div>
@@ -1229,11 +1241,11 @@ pub fn main() {
                               </tr>
                                 <tr><td style="width:150px;">message <span style="color:red;">*</span></td>
 <td>
-<p class="marked">sending push notification message to all subscribers from server</p>
+<p class="marked">Sending push notification message to all subscribers from server</p>
 <script>
 $(document).ready(function() {
   var schemaWrapper = {
-  "description" : "sending push notification message to all subscribers from server",
+  "description" : "Sending push notification message to all subscribers from server",
   "content" : {
     "application/json" : {
       "schema" : {
@@ -1401,7 +1413,8 @@ $(document).ready(function() {
  -H "Content-Type: application/json" \
  "https://api.jerenslensun.com/api/notification/subscribe" \
  -d '{
-  &quot;token&quot; : &quot;abc123&quot;
+  &quot;tokenID&quot; : &quot;secret123&quot;,
+  &quot;updatedAt&quot; : 1657514549
 }'
 </code></pre>
                           </div>
@@ -1613,11 +1626,11 @@ pub fn main() {
                               </tr>
                                 <tr><td style="width:150px;">subscriber <span style="color:red;">*</span></td>
 <td>
-<p class="marked">sending new push notification token to subscribe from client</p>
+<p class="marked">Sending new push notification token to subscribe from a client</p>
 <script>
 $(document).ready(function() {
   var schemaWrapper = {
-  "description" : "sending new push notification token to subscribe from client",
+  "description" : "Sending new push notification token to subscribe from a client",
   "content" : {
     "application/json" : {
       "schema" : {
@@ -1829,7 +1842,8 @@ $(document).ready(function() {
  -H "Content-Type: application/json" \
  "https://api.jerenslensun.com/api/notification/status" \
  -d '{
-  &quot;token&quot; : &quot;abc123&quot;
+  &quot;tokenID&quot; : &quot;secret123&quot;,
+  &quot;updatedAt&quot; : 1657514549
 }'
 </code></pre>
                           </div>
@@ -2041,11 +2055,11 @@ pub fn main() {
                               </tr>
                                 <tr><td style="width:150px;">subscriber <span style="color:red;">*</span></td>
 <td>
-<p class="marked">sending push notification Token to get status from server</p>
+<p class="marked">Sending push notification Token to get status from server</p>
 <script>
 $(document).ready(function() {
   var schemaWrapper = {
-  "description" : "sending push notification Token to get status from server",
+  "description" : "Sending push notification Token to get status from server",
   "content" : {
     "application/json" : {
       "schema" : {
@@ -2257,7 +2271,8 @@ $(document).ready(function() {
  -H "Content-Type: application/json" \
  "https://api.jerenslensun.com/api/notification/unsubscribe" \
  -d '{
-  &quot;token&quot; : &quot;abc123&quot;
+  &quot;tokenID&quot; : &quot;secret123&quot;,
+  &quot;updatedAt&quot; : 1657514549
 }'
 </code></pre>
                           </div>
@@ -2469,11 +2484,11 @@ pub fn main() {
                               </tr>
                                 <tr><td style="width:150px;">subscriber <span style="color:red;">*</span></td>
 <td>
-<p class="marked">sending push notification Token to unsubscribe from server</p>
+<p class="marked">Sending push notification Token to unsubscribe from server</p>
 <script>
 $(document).ready(function() {
   var schemaWrapper = {
-  "description" : "sending push notification Token to unsubscribe from server",
+  "description" : "Sending push notification Token to unsubscribe from server",
   "content" : {
     "application/json" : {
       "schema" : {

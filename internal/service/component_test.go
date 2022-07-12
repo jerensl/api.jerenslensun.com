@@ -13,8 +13,6 @@ import (
 	"github.com/jerensl/api.jerenslensun.com/internal/tests"
 )
 
-
-
 func TestGetStatusNotSubscriber(t *testing.T) {
 	client := tests.NewHttpClient(t)
 	token := "abc"
@@ -27,13 +25,6 @@ func TestSubscribeNotification(t *testing.T) {
 	token := "abc"
 
 	client.SubscibeNotification(t, token)
-}
-
-func TestAlreadySubscribeNotification(t *testing.T) {
-	client := tests.NewHttpClient(t)
-	token := "abc"
-
-	client.AlreadySubscibeNotification(t, token)
 }
 
 func TestGetStatusAlreadySubscriber(t *testing.T) {
@@ -65,14 +56,6 @@ func TestUnsubscribeNotification(t *testing.T) {
 
 	client.UnsubscibeNotification(t, token)
 }
-
-func TestUnsubscribeFromSubsriberNotExist(t *testing.T) {
-	client := tests.NewHttpClient(t)
-	token := "abc123"
-
-	client.UnsubsciberFromSubscriberNotExist(t, token)
-}
-
 
 func startService() bool {
 	app := NewApplication(context.Background())

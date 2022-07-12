@@ -27,14 +27,15 @@ func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	err := h.app.Commands.AddNewSubscriber.Handle(r.Context(), newSubscriber.Token)
+	token, err := h.app.Commands.AddNewSubscriber.Handle(r.Context(), newSubscriber.TokenID, newSubscriber.UpdatedAt)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
 
 	status := Status{
-		Status: true,
+		IsActive: token.IsActive(),
+		UpdatedAt: token.UpdatedAt(),
 	}
 	
 	render.Status(r, http.StatusCreated)
@@ -48,14 +49,15 @@ func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	isSubscriber, err := h.app.Queries.GetStatusSubscriber.Handle(r.Context(), subscriber.Token)
+	token, err := h.app.Queries.GetStatusSubscriber.Handle(r.Context(), subscriber.TokenID)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
 
 	status := Status{
-		Status: isSubscriber,
+		IsActive: token.IsActive(),
+		UpdatedAt: token.UpdatedAt(),
 	}
 
 	render.Respond(w, r, status)
@@ -68,14 +70,15 @@ func (h HttpServer) UnsubscribeNotification(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	err := h.app.Commands.Unsubscribe.Handle(subscriber.Token)
+	token, err := h.app.Commands.Unsubscribe.Handle(subscriber.TokenID, subscriber.UpdatedAt)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
 
 	status := Status{
-		Status: false,
+		IsActive: token.IsActive(),
+		UpdatedAt: token.UpdatedAt(),
 	}
 
 	render.Respond(w, r, status)
