@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/jerensl/api.jerenslensun.com/internal/adapters"
 	"github.com/stretchr/testify/assert"
@@ -29,6 +30,10 @@ func TestRepository(t *testing.T) {
 
 	t.Run("Test Insert token", func(t *testing.T) {
 		testInsertToken(t, r)
+	})
+
+	t.Run("Test Update token token", func(t *testing.T) {
+		testUpdateToken(t, r)
 	})
 
 	t.Run("Test Insert Existing token", func(t *testing.T) {
@@ -66,42 +71,41 @@ func TestRepository(t *testing.T) {
 }
 
 func testInsertToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	err := repository.UpdatedToken("abc123")
+	tokenOne, err := repository.InsertedToken("abc123", time.Now().Unix())
+	require.Equal(t, "abc123", tokenOne.TokenID())
 	require.NoError(t, err)
-	err = repository.UpdatedToken("abc321")
+
+	tokenTwo, err := repository.InsertedToken("abc321", time.Now().Unix())
+	require.Equal(t, "abc321", tokenTwo.TokenID())
 	require.NoError(t, err)
 }
 
 func testInsertExistingToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	err := repository.UpdatedToken("abc123")
+	_, err := repository.InsertedToken("abc123", time.Now().Unix())
 	require.ErrorContains(t, err, "Unable to insert token to database")
 }
 
+func testUpdateToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	token, err := repository.UpdatedToken("abc321", time.Now().Unix())
+	require.NoError(t, err)
+	require.False(t, token.IsActive())
+}
+
 func testGetToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	hasValue, err := repository.GetToken("abc123")
+	token, isExist, err := repository.GetToken("abc123")
 	require.NoError(t, err)
 
-	assert.True(t, hasValue)
+	assert.True(t, token.IsActive())
+	assert.True(t, isExist)
 }
 
 func testGetTokenNotExist(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	hasValue, err := repository.GetToken("abc1233")
-	require.NoError(t, err)
-
-	assert.False(t, hasValue)
+	_, isExist, _ := repository.GetToken("abc1233")
+	require.False(t, isExist)
 }
 
 func testGetAllToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	expected := []string{"abc123", "abc321"}
-
-	subscriber, err := repository.GetAllToken()
-	require.NoError(t, err)
-
-	assert.Equal(t, expected,subscriber)
-}
-
-func testGetAllTokenAfterDeleteOne(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	expected := []string{"abc321"}
+	expected := []string{"abc123"}
 
 	subscriber, err := repository.GetAllToken()
 	require.NoError(t, err)
@@ -110,8 +114,17 @@ func testGetAllTokenAfterDeleteOne(t *testing.T, repository *adapters.SQLiteToke
 }
 
 func testDeleteToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
-	err := repository.DeleteToken("abc123")
+	err := repository.DeleteToken("abc321")
 	require.NoError(t, err)
+}
+
+func testGetAllTokenAfterDeleteOne(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	expected := []string{"abc123"}
+
+	subscriber, err := repository.GetAllToken()
+	require.NoError(t, err)
+
+	assert.Equal(t, expected,subscriber)
 }
 
 func testDeleteTokenNotExist(t *testing.T, repository *adapters.SQLiteTokenRepository) {

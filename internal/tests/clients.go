@@ -36,67 +36,59 @@ func NewHttpClient(t *testing.T) HTTPClient {
 
 func (h HTTPClient) NotSubscriberStatus(t *testing.T, token string) {
 	var subscriber client.Status 
+	
 	response, err := h.client.SubscriberStatus(context.Background(), client.SubscriberStatusJSONRequestBody{
-		Token: token,
+		TokenID: token,
 	})
 	require.NoError(t, err)
 
 	defer response.Body.Close()
 
 	json.NewDecoder(response.Body).Decode(&subscriber)
-	require.Equal(t, false, subscriber.Status)
+	require.False(t, subscriber.IsActive)
 	require.Equal(t, http.StatusOK, response.StatusCode)
 }
 
 func (h HTTPClient) AlreadySubscriberStatus(t *testing.T, token string) {
 	var subscriber client.Status 
 	response, err := h.client.SubscriberStatus(context.Background(), client.SubscriberStatusJSONRequestBody{
-		Token: token,
+		TokenID: token,
 	})
 	require.NoError(t, err)
 
 	defer response.Body.Close()
 
 	json.NewDecoder(response.Body).Decode(&subscriber)
-	require.Equal(t, true, subscriber.Status)
+	require.True(t, subscriber.IsActive)
 	require.Equal(t, http.StatusOK, response.StatusCode)
 }
 
-func (h HTTPClient) SubscibeNotification(t *testing.T, token string) {
+func (h HTTPClient) SubscibeNotification(t *testing.T, token string, updateAt int64) {
+	var subscriber client.Status 
 	response, err := h.client.SubscribeNotification(context.Background(), client.SubscribeNotificationJSONRequestBody{
-		Token: token,
+		TokenID: token,
+		UpdatedAt: updateAt,
 	})
 	require.NoError(t, err)
 
+	defer response.Body.Close()
+
+	json.NewDecoder(response.Body).Decode(&subscriber)
+	require.True(t, subscriber.IsActive)
 	require.Equal(t, http.StatusCreated, response.StatusCode)
 }
 
-func (h HTTPClient) AlreadySubscibeNotification(t *testing.T, token string) {
-	response, err := h.client.SubscribeNotification(context.Background(), client.SubscribeNotificationJSONRequestBody{
-		Token: token,
-	})
-	require.NoError(t, err)
-
-	require.Equal(t, http.StatusInternalServerError, response.StatusCode)
-}
-
-
-func (h HTTPClient) UnsubscibeNotification(t *testing.T, token string) {
+func (h HTTPClient) UnsubscibeNotification(t *testing.T, token string, updateAt int64) {
+	var subscriber client.Status 
 	response, err := h.client.UnsubscribeNotification(context.Background(), client.UnsubscribeNotificationJSONRequestBody{
-		Token: token,
+		TokenID: token,
+		UpdatedAt: updateAt,
 	})
 	require.NoError(t, err)
 
+	json.NewDecoder(response.Body).Decode(&subscriber)
+	require.False(t, subscriber.IsActive)
 	require.Equal(t, http.StatusOK, response.StatusCode)
-}
-
-func (h HTTPClient) UnsubsciberFromSubscriberNotExist(t *testing.T, token string) {
-	response, err := h.client.UnsubscribeNotification(context.Background(), client.UnsubscribeNotificationJSONRequestBody{
-		Token: token,
-	})
-	require.NoError(t, err)
-
-	require.Equal(t, http.StatusInternalServerError, response.StatusCode)
 }
 
 func (h HTTPClient) SendNotification(t *testing.T, title, message string) {

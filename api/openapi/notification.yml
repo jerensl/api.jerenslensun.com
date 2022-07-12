@@ -112,20 +112,32 @@ components:
   schemas:
     Subscriber:
       required:
-        - token
+        - tokenID
+        - updatedAt
       properties:
-        token:
+        tokenID:
           type: string
           example: "secret123"
           description: Client Token
+        updatedAt:
+          type: integer
+          format: int64
+          example: 1657514549
+          description: Last updated date
     Status:
       required:
-        - status
+        - isActive
+        - updatedAt
       properties:
-        status:
+        isActive:
           type: boolean
           example: false
           description: Subscriber status
+        updatedAt:
+          type: integer
+          format: int64
+          example: 1657514549
+          description: Last updated date
     Message:
       required:
         - title

@@ -3,16 +3,16 @@ package query
 import (
 	"context"
 
-	"github.com/jerensl/api.jerenslensun.com/internal/domain"
+	"github.com/jerensl/api.jerenslensun.com/internal/domain/notification"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type GetStatusSubscriberHandler struct {
-	tokenRepo domain.Repository
+	tokenRepo notification.Repository
 }
 
 
-func NewGetStatusSubscriberHandler(tokenRepo domain.Repository) GetStatusSubscriberHandler {
+func NewGetStatusSubscriberHandler(tokenRepo notification.Repository) GetStatusSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}
@@ -22,11 +22,11 @@ func NewGetStatusSubscriberHandler(tokenRepo domain.Repository) GetStatusSubscri
 	}
 }
 
-func (c GetStatusSubscriberHandler) Handle(ctx context.Context, query string) (bool, error) {
-	hasToken, err := c.tokenRepo.GetToken(query)
+func (c GetStatusSubscriberHandler) Handle(ctx context.Context, query string) (*notification.Token, error) {
+	token, _, err := c.tokenRepo.GetToken(query)
 	if err != nil {
-		return hasToken, errors.NewSlugError(err.Error(), "unable to get token")
+		return token, errors.NewSlugError(err.Error(), "unable to get token")
 	}
 
-	return hasToken, nil
+	return token, nil
 }

@@ -3,16 +3,16 @@ package query
 import (
 	"context"
 
-	"github.com/jerensl/api.jerenslensun.com/internal/domain"
+	"github.com/jerensl/api.jerenslensun.com/internal/domain/notification"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type GetAllSubscriberHandler struct {
-	tokenRepo domain.Repository
+	tokenRepo notification.Repository
 }
 
 
-func NewGetAllSubscriberHandler(tokenRepo domain.Repository) GetAllSubscriberHandler {
+func NewGetAllSubscriberHandler(tokenRepo notification.Repository) GetAllSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}

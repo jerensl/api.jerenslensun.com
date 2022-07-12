@@ -3,15 +3,15 @@ package command
 import (
 	"context"
 
-	"github.com/jerensl/api.jerenslensun.com/internal/domain"
+	"github.com/jerensl/api.jerenslensun.com/internal/domain/notification"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/errors"
 )
 
 type AddNewSubscriberHandler struct {
-	tokenRepo domain.Repository
+	tokenRepo notification.Repository
 }
 
-func NewAddNewSubscriberHandler(tokenRepo domain.Repository) AddNewSubscriberHandler {
+func NewAddNewSubscriberHandler(tokenRepo notification.Repository) AddNewSubscriberHandler {
 	if tokenRepo == nil {
 		panic("nil tokenRepo")
 	}
@@ -21,11 +21,11 @@ func NewAddNewSubscriberHandler(tokenRepo domain.Repository) AddNewSubscriberHan
 	}
 }
 
-func (c AddNewSubscriberHandler) Handle(ctx context.Context, query string) (error) {
-	err := c.tokenRepo.UpdatedToken(query)
+func (c AddNewSubscriberHandler) Handle(ctx context.Context, tokenID string, updateAt int64) (*notification.Token, error) {
+	token, err := c.tokenRepo.UpdatedToken(tokenID, updateAt)
 	if err != nil {
-		return errors.NewSlugError(err.Error(), "unable to add subscriber")
+		return nil, errors.NewSlugError(err.Error(), "unable to add subscriber")
 	}
 
-	return nil
+	return token, nil
 }
