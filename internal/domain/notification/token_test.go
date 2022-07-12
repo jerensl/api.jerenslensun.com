@@ -12,12 +12,12 @@ func TestNewToken(t *testing.T) {
 	tokenID := "ab2941j4149j"
 	isActive := true
 	updatedAt := time.Now().Unix()
-	token, err := notification.NewToken(tokenID, isActive, time.Now().Unix())
+	token, err := notification.NewToken(tokenID, isActive, updatedAt)
 	require.NoError(t, err)
 
 	require.Equal(t, tokenID, token.TokenID())
-	require.Equal(t, isActive, token.IsActive())
-	require.Equal(t, time.Unix(updatedAt, 0), token.UpdatedAt())
+	require.True(t, token.IsActive())
+	require.Equal(t, updatedAt, token.UpdatedAt())
 }
 
 func TestNewTokenInvalid(t *testing.T) {

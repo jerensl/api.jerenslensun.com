@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jerensl/api.jerenslensun.com/internal/ports"
@@ -23,8 +24,9 @@ func TestGetStatusNotSubscriber(t *testing.T) {
 func TestSubscribeNotification(t *testing.T) {
 	client := tests.NewHttpClient(t)
 	token := "abc"
+	updateAt := time.Now().Unix()
 
-	client.SubscibeNotification(t, token)
+	client.SubscibeNotification(t, token, updateAt)
 }
 
 func TestGetStatusAlreadySubscriber(t *testing.T) {
@@ -53,8 +55,9 @@ func TestSendNotificationWithouAutz(t *testing.T) {
 func TestUnsubscribeNotification(t *testing.T) {
 	client := tests.NewHttpClient(t)
 	token := "abc"
+	updateAt := time.Now().Unix()
 
-	client.UnsubscibeNotification(t, token)
+	client.UnsubscibeNotification(t, token, updateAt)
 }
 
 func startService() bool {

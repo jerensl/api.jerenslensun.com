@@ -63,10 +63,11 @@ func (h HTTPClient) AlreadySubscriberStatus(t *testing.T, token string) {
 	require.Equal(t, http.StatusOK, response.StatusCode)
 }
 
-func (h HTTPClient) SubscibeNotification(t *testing.T, token string) {
+func (h HTTPClient) SubscibeNotification(t *testing.T, token string, updateAt int64) {
 	var subscriber client.Status 
 	response, err := h.client.SubscribeNotification(context.Background(), client.SubscribeNotificationJSONRequestBody{
 		TokenID: token,
+		UpdatedAt: updateAt,
 	})
 	require.NoError(t, err)
 
@@ -77,10 +78,11 @@ func (h HTTPClient) SubscibeNotification(t *testing.T, token string) {
 	require.Equal(t, http.StatusCreated, response.StatusCode)
 }
 
-func (h HTTPClient) UnsubscibeNotification(t *testing.T, token string) {
+func (h HTTPClient) UnsubscibeNotification(t *testing.T, token string, updateAt int64) {
 	var subscriber client.Status 
 	response, err := h.client.UnsubscribeNotification(context.Background(), client.UnsubscribeNotificationJSONRequestBody{
 		TokenID: token,
+		UpdatedAt: updateAt,
 	})
 	require.NoError(t, err)
 
