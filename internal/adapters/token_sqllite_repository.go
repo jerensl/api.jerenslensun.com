@@ -25,18 +25,15 @@ func NewSQLiteConnection() (*sqlx.DB, error) {
 	}
 
 	schema := `CREATE TABLE IF NOT EXISTS tokens (
-		token_id text NOT NULL,
-		is_active integer,
-		updated_at integer
+		token_id VARCHAR(250) NOT NULL,
+		is_active INTEGER,
+		updated_at INTEGER
 	);
 			CREATE UNIQUE INDEX IF NOT EXISTS idx_token_user
 		ON tokens (token_id);
 	`
 
-	_, err = db.Exec(schema)
-	if err != nil {
-		return nil, errors.Wrap(err, "cannot execute schema to sqlite")
-	}
+	db.MustExec(schema)
 
 	return	db, nil
 }
