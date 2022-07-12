@@ -16,7 +16,7 @@ COPY --from=builder /app/docs/ /app/docs/
 COPY service-account.json ./
 ENV SERVICE_ACCOUNT_FILE "./service-account.json"
 ENV PROJECT_ID "jerens-app"
-ENV SQLITE_DB "/home/database.sqlite"
+ENV SQLITE_DB "/home/site/wwwroot/database.sqlite"
 ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com"
 ENV PORT 8080
 EXPOSE 8080
