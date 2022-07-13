@@ -1,7 +1,6 @@
 package adapters_test
 
 import (
-	"fmt"
 	"os"
 	"testing"
 	"time"
@@ -13,13 +12,13 @@ import (
 
 func TestMain(m *testing.M) {
 	testCases := m.Run()
-	os.Remove(os.Getenv("../../database/unit_test.sqlite"))
+	os.Remove(os.Getenv("SQLITE_DB_TEST"))
 	os.Exit(testCases)
 }
 
 
 func newSqlLiteRepository(t *testing.T) *adapters.SQLiteTokenRepository {
-	db, err := adapters.NewSQLiteConnection()
+	db, err := adapters.NewSQLiteConnection(os.Getenv("SQLITE_DB_TEST"))
 	require.NoError(t, err)
 
 	return adapters.NewSQLiteTokenRepository(db)
@@ -63,11 +62,6 @@ func TestRepository(t *testing.T) {
 	t.Run("Test Get All token After Delete One", func(t *testing.T) {
 		testGetAllTokenAfterDeleteOne(t, r)
 	})
-
-	err := os.Remove("../../database/unit_test.sqlite")
-	if err != nil {
-		fmt.Println("cannot remove database")
-	}
 }
 
 func testInsertToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {

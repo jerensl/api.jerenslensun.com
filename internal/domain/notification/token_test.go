@@ -20,6 +20,18 @@ func TestNewToken(t *testing.T) {
 	require.Equal(t, updatedAt, token.UpdatedAt())
 }
 
+func TestUnmarshalTokenFromDB(t *testing.T) {
+	tokenID := "ab2941j4149j"
+	isActive := true
+	updatedAt := time.Now().Unix()
+	token, err := notification.UnmarshalTokenFromDatabase(tokenID, isActive, updatedAt)
+	require.NoError(t, err)
+
+	require.Equal(t, tokenID, token.TokenID())
+	require.True(t, token.IsActive())
+	require.Equal(t, updatedAt, token.UpdatedAt())
+}
+
 func TestNewTokenInvalid(t *testing.T) {
 	tokenID := "ab2941j4149j"
 	isActive := true

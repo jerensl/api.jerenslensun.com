@@ -2,7 +2,6 @@ package adapters
 
 import (
 	"database/sql"
-	"os"
 	"time"
 
 	"github.com/jerensl/api.jerenslensun.com/internal/domain/notification"
@@ -18,8 +17,8 @@ type sqliteToken struct {
 	UpdatedAt	int64		`db:"updated_at"`
 }
 
-func NewSQLiteConnection() (*sqlx.DB, error) {
-	db, err := sqlx.Connect("sqlite3", os.Getenv("SQLITE_DB"))
+func NewSQLiteConnection(path string) (*sqlx.DB, error) {
+	db, err := sqlx.Connect("sqlite3", path)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot connect to sqlite")
 	}
