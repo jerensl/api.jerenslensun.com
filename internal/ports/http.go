@@ -109,6 +109,12 @@ func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h HttpServer) SubscriberStats(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("X-API-KEY")
+	if token != os.Getenv("API_KEY") {
+		httperr.Unauthorised("invalid token", nil,w, r)
+		return
+	}
+
 	subsStats, err := h.app.Queries.GetStatsSubscriber.Handle()
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)

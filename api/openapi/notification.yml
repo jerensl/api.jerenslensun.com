@@ -91,7 +91,7 @@ paths:
       operationId: subscriberStats
       responses:
         '200':
-          description: todo
+          description: subsriber stat response
           content:
             application/json:
               schema:
