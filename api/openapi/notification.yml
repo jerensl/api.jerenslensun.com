@@ -85,6 +85,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /notification/stats:
+    get:
+      summary: Subscriber Stats
+      operationId: subscriberStats
+      responses:
+        '200':
+          description: todo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stats'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - ApiKeyAuth: []
+
   /notification/send:
     post:
       summary: Send notification to all subscriber
@@ -151,6 +171,25 @@ components:
           type: string
           example: "Article about something"
           description: Notification message
+    Stats:
+      required:
+        - totalSubs
+        - totalActiveSubs
+        - totalInactiveSubs
+      properties:
+        totalSubs:
+          type: integer
+          example: 10
+          description: Total subscribers
+        totalActiveSubs:
+          type: integer
+          example: 7
+          description: Totala active subscribers
+        totalInactiveSubs:
+          type: integer
+          example: 3
+          description: Total inactive subscribers
+
     Error:
       type: object
       required:

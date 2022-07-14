@@ -6,4 +6,5 @@ type Repository interface {
 	UpdatedToken(tokenID string, updatedAt int64) (*Token, error)
 	InsertedToken(tokenID string, updatedAt int64) (*Token, error)
 	DeleteToken(tokenID string) error
+	GetStatisticToken() (*Stats, error)
 } 

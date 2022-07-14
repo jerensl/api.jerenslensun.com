@@ -93,6 +93,9 @@ type ClientInterface interface {
 
 	SendNotification(ctx context.Context, body SendNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// SubscriberStats request
+	SubscriberStats(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// SubscriberStatus request with any body
 	SubscriberStatusWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -123,6 +126,18 @@ func (c *Client) SendNotificationWithBody(ctx context.Context, contentType strin
 
 func (c *Client) SendNotification(ctx context.Context, body SendNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewSendNotificationRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SubscriberStats(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSubscriberStatsRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -241,6 +256,33 @@ func NewSendNotificationRequestWithBody(server string, contentType string, body 
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewSubscriberStatsRequest generates requests for SubscriberStats
+func NewSubscriberStatsRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/notification/stats")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -413,6 +455,9 @@ type ClientWithResponsesInterface interface {
 
 	SendNotificationWithResponse(ctx context.Context, body SendNotificationJSONRequestBody, reqEditors ...RequestEditorFn) (*SendNotificationResponse, error)
 
+	// SubscriberStats request
+	SubscriberStatsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*SubscriberStatsResponse, error)
+
 	// SubscriberStatus request with any body
 	SubscriberStatusWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SubscriberStatusResponse, error)
 
@@ -445,6 +490,29 @@ func (r SendNotificationResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r SendNotificationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SubscriberStatsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *Stats
+	JSONDefault  *Error
+}
+
+// Status returns HTTPResponse.Status
+func (r SubscriberStatsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SubscriberStatsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -537,6 +605,15 @@ func (c *ClientWithResponses) SendNotificationWithResponse(ctx context.Context, 
 	return ParseSendNotificationResponse(rsp)
 }
 
+// SubscriberStatsWithResponse request returning *SubscriberStatsResponse
+func (c *ClientWithResponses) SubscriberStatsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*SubscriberStatsResponse, error) {
+	rsp, err := c.SubscriberStats(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSubscriberStatsResponse(rsp)
+}
+
 // SubscriberStatusWithBodyWithResponse request with arbitrary body returning *SubscriberStatusResponse
 func (c *ClientWithResponses) SubscriberStatusWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*SubscriberStatusResponse, error) {
 	rsp, err := c.SubscriberStatusWithBody(ctx, contentType, body, reqEditors...)
@@ -602,6 +679,39 @@ func ParseSendNotificationResponse(rsp *http.Response) (*SendNotificationRespons
 	}
 
 	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
+		var dest Error
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSONDefault = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSubscriberStatsResponse parses an HTTP response from a SubscriberStatsWithResponse call
+func ParseSubscriberStatsResponse(rsp *http.Response) (*SubscriberStatsResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SubscriberStatsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest Stats
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
 		var dest Error
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {

@@ -107,3 +107,19 @@ func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h HttpServer) SubscriberStats(w http.ResponseWriter, r *http.Request) {
+	subsStats, err := h.app.Queries.GetStatsSubscriber.Handle()
+	if err != nil {
+		httperr.RespondWithSlugError(err, w, r)
+		return
+	}
+
+	stats := Stats{
+		TotalSubs: subsStats.TotalSubs(),
+		TotalActiveSubs: subsStats.TotalActiveSubs(),
+		TotalInactiveSubs: subsStats.TotalInactiveSubs(),
+	}
+
+	render.Respond(w, r, stats)
+}
