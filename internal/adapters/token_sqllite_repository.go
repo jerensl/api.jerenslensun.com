@@ -17,6 +17,13 @@ type sqliteToken struct {
 	UpdatedAt	int64		`db:"updated_at"`
 }
 
+type sqliteTokenStat struct {
+	TotalTokens			int			`db:"total_tokens"`
+	TotalActiveTokens	int			`db:"total_active_tokens"`
+	TotalInactiveTokens	int			`db:"total_inactive_tokens"`
+}
+
+
 func NewSQLiteConnection(path string) (*sqlx.DB, error) {
 	db, err := sqlx.Connect("sqlite3", path)
 	if err != nil {
@@ -147,6 +154,29 @@ func (s SQLiteTokenRepository) getAllToken() (subscriber []string, err error) {
 	}	
 
 	return subscriber, nil
+}
+
+func (s SQLiteTokenRepository) GetStatisticToken() (*notification.Stats, error) {
+	return s.getStatisticToken()
+}
+
+func (s SQLiteTokenRepository) getStatisticToken() (*notification.Stats, error) {
+	var TokenStat sqliteTokenStat
+
+	err := s.db.QueryRowx("SELECT count(*) AS total_tokens, SUM(is_active = 0) AS total_active_tokens, SUM(is_active = 1) AS total_inactive_tokens FROM tokens").StructScan(&TokenStat)
+
+	if errors.Is(err, sql.ErrNoRows) {
+		return &notification.Stats{}, errors.Wrap(err, "Unable to parse token")
+	} else if err != nil {
+		return &notification.Stats{}, errors.Wrap(err, "unable to get token from db")
+	}
+
+	stats, err := notification.UnmarshalStatsFromDatabase(TokenStat.TotalTokens, TokenStat.TotalActiveTokens, TokenStat.TotalInactiveTokens)
+	if err != nil {
+		return nil,  errors.Wrap(err, "unable to parse stats from db")
+	}	
+
+	return stats, nil
 }
 
 func (s SQLiteTokenRepository) DeleteToken(token string) error {

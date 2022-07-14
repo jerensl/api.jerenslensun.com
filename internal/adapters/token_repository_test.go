@@ -31,8 +31,12 @@ func TestRepository(t *testing.T) {
 		testInsertToken(t, r)
 	})
 
-	t.Run("Test Update token token", func(t *testing.T) {
+	t.Run("Test Update token", func(t *testing.T) {
 		testUpdateToken(t, r)
+	})
+
+	t.Run("Test Update token not exist", func(t *testing.T) {
+		testUpdateTokenNotExist(t, r)
 	})
 
 	t.Run("Test Insert Existing token", func(t *testing.T) {
@@ -49,6 +53,10 @@ func TestRepository(t *testing.T) {
 
 	t.Run("Test Get All token", func(t *testing.T) {
 		testGetAllToken(t, r)
+	})
+
+	t.Run("Test Count Statistic token", func(t *testing.T) {
+		testCountStatisticToken(t, r)
 	})
 
 	t.Run("Test Delete token", func(t *testing.T) {
@@ -85,6 +93,15 @@ func testUpdateToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	require.False(t, token.IsActive())
 }
 
+func testUpdateTokenNotExist(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	token, err := repository.UpdatedToken("abc456", time.Now().Unix())
+	require.NoError(t, err)
+	require.True(t, token.IsActive())
+
+	err = repository.DeleteToken("abc456")
+	require.NoError(t, err)
+}
+
 func testGetToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	token, isExist, err := repository.GetToken("abc123")
 	require.NoError(t, err)
@@ -105,6 +122,19 @@ func testGetAllToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
 	require.NoError(t, err)
 
 	assert.Equal(t, expected,subscriber)
+}
+
+func testCountStatisticToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
+	totalToken := 2
+	totalActiveToken := 1
+	totalInactiveToken := 1
+
+	stat, err := repository.GetStatisticToken()
+	require.NoError(t, err)
+
+	assert.Equal(t, totalToken, stat.TotalSubs())
+	assert.Equal(t, totalActiveToken, stat.TotalActiveSubs())
+	assert.Equal(t, totalInactiveToken, stat.TotalInactiveSubs())
 }
 
 func testDeleteToken(t *testing.T, repository *adapters.SQLiteTokenRepository) {
