@@ -16,6 +16,9 @@ type ServerInterface interface {
 	// Send notification to all subscriber
 	// (POST /notification/send)
 	SendNotification(w http.ResponseWriter, r *http.Request)
+	// Subscriber Stats
+	// (GET /notification/stats)
+	SubscriberStats(w http.ResponseWriter, r *http.Request)
 	// Subscriber Status
 	// (POST /notification/status)
 	SubscriberStatus(w http.ResponseWriter, r *http.Request)
@@ -44,6 +47,23 @@ func (siw *ServerInterfaceWrapper) SendNotification(w http.ResponseWriter, r *ht
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.SendNotification(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// SubscriberStats operation middleware
+func (siw *ServerInterfaceWrapper) SubscriberStats(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	ctx = context.WithValue(ctx, ApiKeyAuthScopes, []string{""})
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.SubscriberStats(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -213,6 +233,9 @@ func HandlerWithOptions(si ServerInterface, options ChiServerOptions) http.Handl
 
 	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/notification/send", wrapper.SendNotification)
+	})
+	r.Group(func(r chi.Router) {
+		r.Get(options.BaseURL+"/notification/stats", wrapper.SubscriberStats)
 	})
 	r.Group(func(r chi.Router) {
 		r.Post(options.BaseURL+"/notification/status", wrapper.SubscriberStatus)

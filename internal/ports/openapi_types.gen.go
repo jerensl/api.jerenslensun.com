@@ -22,6 +22,18 @@ type Message struct {
 	Title string `json:"title"`
 }
 
+// Stats defines model for Stats.
+type Stats struct {
+	// Totala active subscribers
+	TotalActiveSubs int `json:"totalActiveSubs"`
+
+	// Total inactive subscribers
+	TotalInactiveSubs int `json:"totalInactiveSubs"`
+
+	// Total subscribers
+	TotalSubs int `json:"totalSubs"`
+}
+
 // Status defines model for Status.
 type Status struct {
 	// Subscriber status

@@ -163,7 +163,7 @@ func (s SQLiteTokenRepository) GetStatisticToken() (*notification.Stats, error) 
 func (s SQLiteTokenRepository) getStatisticToken() (*notification.Stats, error) {
 	var TokenStat sqliteTokenStat
 
-	err := s.db.QueryRowx("SELECT count(*) AS total_tokens, SUM(is_active = 0) AS total_active_tokens, SUM(is_active = 1) AS total_inactive_tokens FROM tokens").StructScan(&TokenStat)
+	err := s.db.QueryRowx("SELECT count(*) AS total_tokens, SUM(is_active = 1) AS total_active_tokens, SUM(is_active = 0) AS total_inactive_tokens FROM tokens").StructScan(&TokenStat)
 
 	if errors.Is(err, sql.ErrNoRows) {
 		return &notification.Stats{}, errors.Wrap(err, "Unable to parse token")

@@ -25,6 +25,8 @@ func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http
 	apiRouter := chi.NewRouter()
 	setMiddlewares(apiRouter)
 
+	rootRouter.Get("/healthcheck", healthCheck)
+
 	rootRouter.Mount("/api", createHandler(apiRouter))
 
 	rootRouter.Mount("/docs", http.StripPrefix("/docs", http.FileServer(http.Dir("./docs"))))
@@ -32,6 +34,10 @@ func RunHTTPServerOnAddr(addr string, createHandler func(router chi.Router) http
 	logrus.Info("Starting RESTFull Api server on Port "+os.Getenv("PORT"))
 
 	_ = http.ListenAndServe(addr, rootRouter)
+}
+
+func healthCheck(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
 }
 
 func setMiddlewares(router *chi.Mux)  {

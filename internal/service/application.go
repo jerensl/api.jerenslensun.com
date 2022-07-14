@@ -35,6 +35,7 @@ func NewApplication(ctx context.Context) app.Application {
 		Queries: app.Queries{
 			GetStatusSubscriber: query.NewGetStatusSubscriberHandler(tokenRepository),
 			GetAllSubscriber: query.NewGetAllSubscriberHandler(tokenRepository),
+			GetStatsSubscriber: query.NewGetStatsSubscriberHandler(tokenRepository),
 		},
 	}
 }
