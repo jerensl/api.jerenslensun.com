@@ -16,6 +16,7 @@
 
 # Sqlite db
 /database/db*
+/data/db*
 
 # documentation
 /documentation
