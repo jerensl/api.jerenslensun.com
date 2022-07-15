@@ -7,7 +7,7 @@ services:
     volumes:
       - ./internal:/internal
       - ./service-account-key.json:$SERVICE_ACCOUNT_FILE
-      - ./database:/database
+      - ./data:/data
     working_dir: /internal
     ports:
       - "127.0.0.1:5000:$PORT"
