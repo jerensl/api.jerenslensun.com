@@ -26,13 +26,6 @@ COPY service-account.json ./
 COPY etc/litestream.yml /etc/litestream.yml
 COPY scripts/run.sh /scripts/run.sh
 
-ENV SERVICE_ACCOUNT_FILE "./service-account.json"
-ENV SQLITE_DB "/data/db"
-ENV PROJECT_ID "jerens-app"
-ENV CORS_ALLOWED_ORIGINS "https://www.jerenslensun.com"
-
-ENV PORT 8080
-
 EXPOSE 8080
 
 CMD [ "/scripts/run.sh" ]
