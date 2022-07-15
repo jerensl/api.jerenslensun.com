@@ -1,0 +1,5 @@
+dbs:
+  - path: /data/db
+    replicas:
+      - url: ${REPLICA_URL}
+        account-key: ${LITESTREAM_AZURE_ACCOUNT_KEY}
