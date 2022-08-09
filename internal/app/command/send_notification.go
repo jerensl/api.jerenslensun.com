@@ -7,26 +7,21 @@ import (
 )
 
 type SendNotificationHandler struct {
-	writeToModel SendNotificationReadModel
+	notificationService NotificationService
 }
 
-type SendNotificationReadModel interface {
-	SendNotification(ctx context.Context, token []string, title string, message string) error
-}
-
-
-func NewSendNotificationHandler(tokenRepo SendNotificationReadModel) SendNotificationHandler {
-	if tokenRepo == nil {
-		panic("nil tokenRepo")
+func NewSendNotificationHandler(notificationService NotificationService) SendNotificationHandler {
+	if notificationService == nil {
+		panic("nil notificationService")
 	}
 
 	return SendNotificationHandler{
-		writeToModel: tokenRepo,
+		notificationService: notificationService,
 	}
 }
 
 func (c SendNotificationHandler) Handle(ctx context.Context, listOfToken []string, title string, message string) (error) {
-	err := c.writeToModel.SendNotification(ctx, listOfToken, title, message)
+	err := c.notificationService.SendNotification(ctx, listOfToken, title, message)
 	if err != nil {
 		return errors.NewSlugError(err.Error(), "unable to send notifications")
 	}

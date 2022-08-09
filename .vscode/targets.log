@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jul  9 20:07:57 2022
+# Make data base, printed on Sun Aug  7 20:37:58 2022
 
 # Variables
 
@@ -21,13 +21,13 @@ LOG_LEVEL = debug
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-STARSHIP_SESSION_KEY = 1389623986242231
+STARSHIP_SESSION_KEY = 2615554663048516
 # environment
 WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
 # environment
 VSCODE_CWD = /mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code
 # environment
-DIRENV_WATCHES = eJx0zr1OxTAMQOF3yVzVbfNjtzsjEjticFNH7VWaXCW5BQnx7ixMCNaznO_1U71w29WiYM-nwE2KpBrhXvJNfKvA96P_iZLqI_U-n9BLuopXnXrOWztOUcvoLGpLpKlTTx9HbVUtrTzkq_tn0MfsOULduQhsR5F0AceY34G1Z7camtGhBPSEOKPX2kiYaDCTHcwatjWg5dVpGZ2j2U5kBjdxGJn-YpnxF-vtOwAA__-QvE91
+DIRENV_WATCHES = eJx0zrFOBCEQgOF3od7suMMBw_aWJvbGYoQhuxcWLsCtJsZ3t7Ey2v7N_718qmcem1oVbPUQuEqT0jPcWr1KGB34ts8_UUq_lznUA2YpZwtqUk81jv0QtS7WOI9oLU3q8WPvo6t1tLt8Tf8M5lwDZ-gbN4G4NykncM71HYR0TCQPpI0jSojsLxqN9Qk5JmeiSehEjNM2oXsLfmGrmS5E2iRczB8s79wv1ut3AAAA__-F1E9a
 # default
 MAKE_COMMAND := make
 # environment
@@ -67,9 +67,9 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-HTTP_ADDR = localhost:5000
+HTTP_ADDR = localhost:8080
 # environment
-PORT = 5000
+PORT = 8080
 # environment
 WALLABY_PRODUCTION = true
 # environment
@@ -107,17 +107,17 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/jerensl/.vscode-server/bin/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
+PATH = /home/jerensl/.vscode-server/bin/da76f93349a72022ca4670c1b84860304616aaa2/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
 # default
 MAKEFILES := 
 # automatic
 ^F = $(notdir $^)
 # environment
-SQLITE_DB = ../../database/db.test.sqlite
+SQLITE_DB = ../data/db.test.sqlite
 # environment
-SERVICE_ACCOUNT_FILE = ../../service-account-key.json
+SERVICE_ACCOUNT_FILE = /service-account-key.json
 # environment
-WT_SESSION = 848fcd4c-23c6-4878-818c-41ae72e55caf
+WT_SESSION = 627d0f66-d091-4f90-ad4a-e91a9f8c10ea
 # environment
 LOCAL_ENV = true
 # automatic
@@ -129,7 +129,7 @@ HOSTTYPE = x86_64
 # automatic
 +F = $(notdir $+)
 # environment
-WSL_INTEROP = /run/WSL/1543_interop
+WSL_INTEROP = /run/WSL/9_interop
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
@@ -157,9 +157,9 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 PROJECT_ID = jerens-app
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-d614d675-c498-43e0-94a1-2fe058c8e19a.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-8b9ebd7a-6789-4b9a-a627-f5025803a60a.sock
 # environment
-DIRENV_DIFF = eJyUkktzokAUhf_LXfNS41gyK4QW0ZZG5KHZdCF2ImgaQrdISOW_TzmVx2oWsz11vlN167vvUIP5_qEAB_MdrMCjK7QHE0rWMC4uk9F09AAK2CTcUgtjkiKHktBzPX8LJpykrE1dv1R5djlVQpojwzB-31Nh6vrnBuPiyrW8egEFHC9EfkIdLwQTVP1UvbCvml43VclyKfSsLrR_s3MPIzDhP1hdY7xt8p-J1IrsBbofwJad0TcD0kXWekPmo7ekTw5Pfil7UaJSFvncX0ySNNvZ6Xi24d2k6Na2n_Wc0EE8GdyG07TYr1V-Q8NVPWtOu3bpP61aa_oroMUjfvVorPLpDF-resd3DUl7SeK8rbBb43p1iaJuujgksWyi_vxKJTfWT4LE-HjdnEQ4nhtWzvajB3fwOMmzF-meZsEWkVWwG56LfebY0SK_ZbJMn8fHpHYfh-UwHp9n5bFzl1zd17ybq60kN8uiVN20aDoABRZRFFDLce4GfsSNDcMABTCxLUyRn4AJsrmyv5FLMUoQBhOO7HB9BgUCEkZgwicUhGSJ7Ih6zvfjqFldgwJbFCaejahl2yT2oy93mqZrmi5Y0xY5U7M8r65cqmf2ppWi4ndug70IUWf2XT5mMjtkgunHgyaZkJp4vRSSwcfHnwAAAP__CQDkbg==
+DIRENV_DIFF = eJyUkktzokAUhf_LXSMPMQMyK4TWYFreyJhNF2InikID3WAelf8-5VQmWc1itqfud6pufecdWrDePyRowHoHO_TIA9qBBRXtacMvhj7XZyCBE8QJsTEOcuSSIPZWnp-ABUchWktRLqwsLkfGhaWrqvrzlnJLUT47aMOHRi5ZDRK4Xoz8LXG9GCyYKEdW079nStuzipaCK0V7kv_NLj2MwIL_YBWZNmNfflfkdurco9sDdP2ivvXLYOGg6DlY6uxg8GGzWVxJka_H_WrHouPwUuaYO2LNH3VhoNfpaPjE0MyuLmmtse0-zKIBdalahWXeaw-rhT4T3CRZ1pHLW5PZ0137eBVddja1alQjkRh54M0ZzvTOzMOR_RCawMJMn8zN3eXqPk6e9_5sNfNfz025MbT7XaymThS2nlolrOL4pfPn0fluXdNTQo-o8jdT9ovjp3rV18kdmp7i8m1hcmN-HbVB6LZt24RMlhqaFyDBfZqGxHbdm4FvcaZqqiABDhwbE-RvwQLRD_RPtCIYbREGCw50PzyDBGEQp2DBJxTGwRo5KfHcr-FMirYFCRIUbz0HEdtxgsxPv9xx2o-nkk6KsmRDIyZn-ipXnDU3JMJeioi7AAtkWTkUolAOe1lQLmTeXU6CwsfH7wAAAP__vavftQ==
 # environment
 GOMODCACHE = /home/jerensl/go/pkg/mod
 # environment
@@ -191,9 +191,9 @@ WSL_DISTRO_NAME = Arch
 
 # Directories
 
-# . (device 2080, inode 53858): 23 files, no impossibilities.
+# . (device 2080, inode 53858): 27 files, no impossibilities.
 
-# 23 files, no impossibilities in 1 directories.
+# 27 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -204,7 +204,7 @@ WSL_DISTRO_NAME = Arch
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-09 20:07:38.7022414
+#  Last modified 2022-07-09 20:10:45.0822414
 #  File has been updated.
 #  Successfully updated.
 
@@ -242,7 +242,7 @@ openapi_documentation:
   -v ${PWD}:/local openapitools/openapi-generator-cli generate \
   -i /local/api/openapi/notification.yml \
   -g html2 \
-  -o /local/documentation/openapi
+  -o /local/internal/docs
 
 plantuml_up:
 #  Phony target (prerequisite of .PHONY).
@@ -265,12 +265,13 @@ plantuml_up:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 32 / storage = 334 B / avg = 10 B
-# current buf: size = 8162 B / used = 334 B / count = 32 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 36 / storage = 372 B / avg = 10 B
+# current buf: size = 8162 B / used = 372 B / count = 36 / avg = 10 B
 
-# strcache performance: lookups = 47 / hit rate = 31%
+# strcache performance: lookups = 51 / hit rate = 29%
 # hash-table stats:
-# Load=32/8192=0%, Rehash=0, Collisions=0/47=0%
-# Finished Make data base on Sat Jul  9 20:07:57 2022
+ 
+# Load=36/8192=0%, Rehash=0, Collisions=0/51=0%
+# Finished Make data base on Sun Aug  7 20:37:58 2022
 
  
