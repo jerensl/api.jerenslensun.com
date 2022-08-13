@@ -44,6 +44,7 @@ func (m *Messaging) SendNotification(ctx context.Context,token []string, title s
 		Notification: &messaging.Notification{
 			Title: title,
 			Body: message,
+			ImageURL: "https://ik.imagekit.io/jerensl/logo.png",
 		},
 		Webpush: &messaging.WebpushConfig{
 			FCMOptions: &messaging.WebpushFCMOptions{
