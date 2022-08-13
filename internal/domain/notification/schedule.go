@@ -19,6 +19,7 @@ func (t Job) Execute(task func(title, message string))  {
 type Scheduler struct {
 	Job chan Job
 	Worker int
+	Limit int
 }
 
 func NewScheduler(worker int, task func (title, message string)) *Scheduler {
@@ -39,7 +40,7 @@ func NewScheduler(worker int, task func (title, message string)) *Scheduler {
 }
 
 
-func (s Scheduler) NewJob(name,  title,  message string, duration time.Duration) {
+func (s *Scheduler) NewJob(name,  title,  message string, duration time.Duration) {
 	job := Job{
 		name: name,
 		title: title,

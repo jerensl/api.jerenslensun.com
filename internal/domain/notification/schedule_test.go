@@ -19,21 +19,24 @@ func TestNewScheduler(t *testing.T) {
 	newMsg := "new messages"
 
 	scheduler.NewJob("Test", newTitle, newMsg, time.Second * 5)
-	time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * 6)
 	assert.True(t, result[newTitle])
 }
 
 func TestNewSchedulerLimit(t *testing.T) {
 	result := make(map[string]bool)
-	scheduler := notification.NewScheduler(2, func(title, message string) {
+	scheduler := notification.NewScheduler(1, func(title, message string) {
 		result[title] = true
 	})
 
 	newTitle := "hello"
 	newMsg := "new messages"
-
 	scheduler.NewJob("Test", newTitle, newMsg, time.Second * 5)
-	scheduler.NewJob("Test2", newTitle, newMsg, time.Second * 3)
-	time.Sleep(time.Second * 5)
+
+	newTitleSecond := "hello second"
+	newMsgSecond := "new messages"
+	scheduler.NewJob("Test2", newTitleSecond, newMsgSecond, time.Second * 5)
+	time.Sleep(time.Second * 6)
 	assert.True(t, result[newTitle])
+	assert.False(t, result[newTitleSecond])
 }

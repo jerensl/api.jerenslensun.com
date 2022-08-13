@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Aug  7 20:37:58 2022
+# Make data base, printed on Sat Aug 13 22:26:09 2022
 
 # Variables
 
@@ -21,7 +19,7 @@ LOG_LEVEL = debug
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-STARSHIP_SESSION_KEY = 2615554663048516
+STARSHIP_SESSION_KEY = 2767158478649695
 # environment
 WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
 # environment
@@ -117,7 +115,7 @@ SQLITE_DB = ../data/db.test.sqlite
 # environment
 SERVICE_ACCOUNT_FILE = /service-account-key.json
 # environment
-WT_SESSION = 627d0f66-d091-4f90-ad4a-e91a9f8c10ea
+WT_SESSION = c2d69bb5-9e99-499b-8909-46784cc2ab22
 # environment
 LOCAL_ENV = true
 # automatic
@@ -157,7 +155,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 PROJECT_ID = jerens-app
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-8b9ebd7a-6789-4b9a-a627-f5025803a60a.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-f0f46e90-41b1-40c9-b1a8-c863ef366516.sock
 # environment
 DIRENV_DIFF = eJyUkktzokAUhf_LXSMPMQMyK4TWYFreyJhNF2InikID3WAelf8-5VQmWc1itqfud6pufecdWrDePyRowHoHO_TIA9qBBRXtacMvhj7XZyCBE8QJsTEOcuSSIPZWnp-ABUchWktRLqwsLkfGhaWrqvrzlnJLUT47aMOHRi5ZDRK4Xoz8LXG9GCyYKEdW079nStuzipaCK0V7kv_NLj2MwIL_YBWZNmNfflfkdurco9sDdP2ivvXLYOGg6DlY6uxg8GGzWVxJka_H_WrHouPwUuaYO2LNH3VhoNfpaPjE0MyuLmmtse0-zKIBdalahWXeaw-rhT4T3CRZ1pHLW5PZ0137eBVddja1alQjkRh54M0ZzvTOzMOR_RCawMJMn8zN3eXqPk6e9_5sNfNfz025MbT7XaymThS2nlolrOL4pfPn0fluXdNTQo-o8jdT9ovjp3rV18kdmp7i8m1hcmN-HbVB6LZt24RMlhqaFyDBfZqGxHbdm4FvcaZqqiABDhwbE-RvwQLRD_RPtCIYbREGCw50PzyDBGEQp2DBJxTGwRo5KfHcr-FMirYFCRIUbz0HEdtxgsxPv9xx2o-nkk6KsmRDIyZn-ipXnDU3JMJeioi7AAtkWTkUolAOe1lQLmTeXU6CwsfH7wAAAP__vavftQ==
 # environment
@@ -270,8 +268,9 @@ plantuml_up:
 
 # strcache performance: lookups = 51 / hit rate = 29%
 # hash-table stats:
- 
 # Load=36/8192=0%, Rehash=0, Collisions=0/51=0%
-# Finished Make data base on Sun Aug  7 20:37:58 2022
+# Finished Make data base on Sat Aug 13 22:26:09 2022
 
  
+make: *** No rule to make target 'all'.  Stop.
+
