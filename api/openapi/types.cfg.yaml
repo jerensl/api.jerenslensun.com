@@ -1,0 +1,4 @@
+package: ports
+generate:
+  models: true
+output: openapi_types.gen.go

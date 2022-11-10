@@ -1,0 +1,6 @@
+package: ports
+generate:
+  chi-server: true
+  models: false
+  embedded-spec: true
+output: openapi.gen.go
