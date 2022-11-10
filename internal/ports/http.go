@@ -10,6 +10,9 @@ import (
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/httperr"
 )
 
+//go:generate go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --config=../../api/openapi/types.cfg.yaml ../../api/openapi/notification.yaml
+//go:generate go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --config=../../api/openapi/server.cfg.yaml ../../api/openapi/notification.yaml
+
 type HttpServer struct {
 	app app.Application
 }
