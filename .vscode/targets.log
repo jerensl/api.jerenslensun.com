@@ -1,14 +1,14 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target 'all'.  Stop.
 
-# GNU Make 4.3
+# GNU Make 4.4.1
 # Built for x86_64-pc-linux-gnu
-# Copyright (C) 1988-2020 Free Software Foundation, Inc.
-# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# Copyright (C) 1988-2023 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Nov  5 20:15:11 2022
+# Make data base, printed on Sun Apr 21 11:08:20 2024
 
 # Variables
 
@@ -19,15 +19,15 @@ LC_ALL = C
 # environment
 LOG_LEVEL = debug
 # environment
-PULSE_SERVER = /mnt/wslg/PulseServer
+PULSE_SERVER = unix:/mnt/wslg/PulseServer
 # environment
-STARSHIP_SESSION_KEY = 2986224325248183
+STARSHIP_SESSION_KEY = 1274519941129016
 # environment
-WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
+WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION:WT_PROFILE_ID:
 # environment
 VSCODE_CWD = /mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code
 # environment
-DIRENV_WATCHES = eJx0zrFOBCEQgOF3od7suMPBwPaWJvbGYoQhuxcWLsCtJsZ3t7HRxPZv_u_lUz3z2NSqYKuHwFWalJ7h1upVwujAt33-iVL6vcyhHjBLOVtQk3qqceyHqHWxltATaj-px4-9j67W0e7yNf0zmHMNnKFv3ATi3qScwDnXdxCnY3Ly4LQh5xIi-4tGY31CjolMNAlJxJC2Cekt-IWtZndxTpuEi_nNMuQRPdEf1ut3AAAA__-F2E9a
+DIRENV_WATCHES = eJx0zkFOxSAQgOG7sG46ZSgFehXjYhimaV9oaQCfJsa7u3Gjidt_8ed7-VQ39V2tCvZyCjykytUy3LU8hHsDuo_xJ45cThjlelZWgzpL6scpatXL4jA4NGFQ8nG03tTa65t8Df-8x1yYMrSdqkA6qlxPoJzLO2xBeJ5s3KK2M1KKi0e2xkQf3LRpN3lOCc1itfeGIvLkiDnM0cpGjNNvlg-o54D6D-v1OwAA__8Un07K
 # default
 MAKE_COMMAND := make
 # environment
@@ -43,7 +43,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/jerensl/projects/api.jerenslensun.com
+PWD = /home/jerensl/projects/api.jerensl.com
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # automatic
@@ -55,13 +55,13 @@ LANG = C
 # default
 .LOADED := 
 # default
-.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+.INCLUDE_DIRS := /usr/local/include /usr/include
 # makefile
 MAKEFLAGS = pqrR
 # environment
 API_KEY = jerensl73934
 # makefile
-CURDIR := /home/jerensl/projects/api.jerenslensun.com
+CURDIR := /home/jerensl/projects/api.jerensl.com
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
@@ -71,11 +71,11 @@ HTTP_ADDR = localhost:8080
 # environment
 PORT = 8080
 # environment
-WALLABY_PRODUCTION = true
-# environment
 MFLAGS = -pqrR
 # default
 .SHELLFLAGS := -c
+# environment
+WSL2_GUI_APPS_ENABLED = 1
 # environment
 WAYLAND_DISPLAY = wayland-0
 # automatic
@@ -90,10 +90,12 @@ MAKEFILE_LIST := Makefile
 WT_PROFILE_ID = {a5a97cb8-8961-5535-816d-772efe0c6a3f}
 # automatic
 *F = $(notdir $*)
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+VSCODE_NLS_CONFIG = {"locale":"en","osLocale":"en","availableLanguages":{}}
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # makefile
@@ -107,7 +109,7 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = /home/jerensl/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
+PATH = /home/jerensl/.vscode-server/bin/e170252f762678dec6ca2cc69aba1570769a5d39/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Microsoft SDKs/Azure/CLI2/wbin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Cloudflare/Cloudflare WARP/:/mnt/c/msys64/mingw64/bin:/mnt/c/Users/jeren/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/jeren/AppData/Local/Programs/Microsoft VS Code/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/local/go/bin:/home/jerensl/go/bin
 # default
 MAKEFILES := 
 # automatic
@@ -117,7 +119,7 @@ SQLITE_DB = ../data/db.test.sqlite
 # environment
 SERVICE_ACCOUNT_FILE = /service-account-key.json
 # environment
-WT_SESSION = 8d4885cc-ca32-44cb-81ca-7b3b3923f194
+WT_SESSION = fad828ce-a144-40be-9e7b-09c95367b7b4
 # environment
 LOCAL_ENV = true
 # automatic
@@ -129,15 +131,15 @@ HOSTTYPE = x86_64
 # automatic
 +F = $(notdir $+)
 # environment
-WSL_INTEROP = /run/WSL/685_interop
+WSL_INTEROP = /run/WSL/879_interop
 # 'override' directive
 GNUMAKEFLAGS := 
 # environment
-DIRENV_FILE = /home/jerensl/projects/api.jerenslensun.com/.envrc
+DIRENV_FILE = /home/jerensl/projects/api.jerensl.com/.envrc
 # environment
 LOGNAME = jerensl
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/jeren/.vscode/extensions/ms-vscode-remote.remote-wsl-0.72.0
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/jeren/.vscode/extensions/ms-vscode-remote.remote-wsl-0.88.0
 # makefile
 .DEFAULT_GOAL := openapi_http
 # environment
@@ -145,23 +147,21 @@ DISPLAY = :0
 # environment
 USER = jerensl
 # default
-MAKE_VERSION := 4.3
+MAKE_VERSION := 4.4.1
 # environment
-DIRENV_DIR = -/home/jerensl/projects/api.jerenslensun.com
+DIRENV_DIR = -/home/jerensl/projects/api.jerensl.com
 # environment
 STARSHIP_SHELL = fish
 # environment
 _ = /usr/sbin/make
 # environment
-XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
+XDG_RUNTIME_DIR = /run/user/1000/
 # environment
 PROJECT_ID = jerens-app
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-b60441d3-dade-4788-831c-ed0ec2ada976.sock
+VSCODE_IPC_HOOK_CLI = /run/user/1000/vscode-ipc-2e0ea83d-6a84-48f1-8d40-d50eabf6245c.sock
 # environment
-DIRENV_DIFF = eJyUks1So0AUhd_lrsOPdsYos-o0nQB2gBCEiZsuhFZABBK6ExLLd5_KlKOrWcz21P1O1a3vvEMP1vvHBFqw3gGHLr-nW7CgFnvRDs0M3aEpTIAE0YZjxoKU2jyI3KXrb8CCUsreMoymy7Om7AZpIdM0f17SwTKMzw7RDqrV8-4NJmC7EfUTbrsRWKAZZfcm_p4Z_b6rRS4HI-sr_d_swmUULPgP1tBFe9jn3xUpjolDLw8IbzTP-0UwJ3T9EixQV8wGtQrnxzBLvcPTctutSzXmKRuI9IZHJGdONIaPB65483BG52t_s9veK-e4SLPGm5VXqk-OqsYSIa1K2M0hP5VOPWdBItevaLfLxcnZOenYSBxntdaPU-2uvpmlppid_Gfz_Oas_PZ-cUA4rtBukx_t9lcxknaL2GnK1uWP0a20qVxu0RWpu2bl48YbPXJNxKvU3FQ-tsUY94pWvPVXah2FBX2-UhJhjDHn2uKa3mUwASeOQ45t-2LhW96teWvCBFhAMOPUT8ACuVfiT7TkjCaUgQWFeFIvMIEwiGKw4BMKo8CjJOau_TUeLet7mMCGRolLKMeEBA9-_OVvEPtDlQsty_NOtVJ7FSe9Hrr2gqyZG1Nuz8ECXTeKTGZG8aRLMUh92DWVFPDx8TsAAP__dQLioA==
-# environment
-GOMODCACHE = /home/jerensl/go/pkg/mod
+DIRENV_DIFF = eJyMkstyozoQht-l19xsfCE6K4Jkgq0gG2Ny2agIlg2YALFkDiSVd5_yVCap2c32q_66uvr_P6AF9PGpQQ3oA9x1wFfkCRCU4ixqWc3tG3sCGngs2nKXUvZAMGdR4AfhFhDkSrXINKsmS6u8kQrZlmX9d6USmebXDlHLS21kzStogIOIhAnHQQQIdDNvXsWfMbM9N6XIlDTTtjC-4N_aIqAEEPybZhqi7s7Zj_3gxt4duZ4tlr31flqwfutujsyfS38ye94eFyJ_LJ_y4jVNbpp04x2WMp1fbL8s9oo7Yj_Xk419k4yV1z0PXjmcBrUbbLpz8juJLw3vl5NpFudlJarnh-N7S2cya1P1SCelOwn9xcapfctWcTqbKgcfdKcfDU_35-3-7eTO3qp-3SzfKRv3t2I5lfZqNb4frVaFJcb9aXOwadSGdsW8bFSog_CDjp4KXN9bWeuXYdhVR72ZTvAM692I_e-6nDu72pqvQIO7OF5zF-Prz3-icizHAg0o81zKSZgAAnW-iN_I55QkhAKCvXi5HEGDNYtiQPAlrSO2JF7MA_xdFT1tW9BgS6Ik8Ah3PY_twvg7MinOXZEJPc2y5lIr_SQGo5RNfVU2NIgJx7eAwDDMfapSc_9iKCGVId-qQgn4_PwVAAD__0ag2ec=
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -170,8 +170,6 @@ HOME = /home/jerensl
 ELECTRON_RUN_AS_NODE = 1
 # environment
 TERM = xterm-256color
-# environment
-GOPROXY = https://proxy.golang.org,direct
 # default
 .RECIPEPREFIX := 
 # automatic
@@ -181,9 +179,9 @@ SUFFIXES :=
 # environment
 WSL_DISTRO_NAME = Arch
 # default
-.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs notintermediate shell-export archives jobserver jobserver-fifo output-sync check-symlink guile load
 # variable set hash-table stats:
-# Load=85/1024=8%, Rehash=0, Collisions=1/115=1%
+# Load=84/1024=8%, Rehash=0, Collisions=1/113=1%
 
 # Pattern-specific Variable Values
 
@@ -191,9 +189,9 @@ WSL_DISTRO_NAME = Arch
 
 # Directories
 
-# . (device 2080, inode 53858): 26 files, no impossibilities.
+# . (device 2080, inode 53858): 34 files, no impossibilities.
 
-# 26 files, no impossibilities in 1 directories.
+# 34 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -204,7 +202,8 @@ WSL_DISTRO_NAME = Arch
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-09 20:10:45.0822414
+#  File is secondary (prerequisite of .SECONDARY).
+#  Last modified 2023-03-23 23:00:45.190817456
 #  File has been updated.
 #  Successfully updated.
 
@@ -258,19 +257,19 @@ plantuml_up:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=8/1024=1%, Rehash=0, Collisions=0/26=0%
+# Load=8/1024=1%, Rehash=0, Collisions=0/27=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 35 / storage = 359 B / avg = 10 B
-# current buf: size = 8162 B / used = 359 B / count = 35 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 44 / storage = 484 B / avg = 11 B
+# current buf: size = 8162 B / used = 484 B / count = 44 / avg = 11 B
 
-# strcache performance: lookups = 50 / hit rate = 30%
+# strcache performance: lookups = 58 / hit rate = 24%
 # hash-table stats:
-# Load=35/8192=0%, Rehash=0, Collisions=0/50=0%
-# Finished Make data base on Sat Nov  5 20:15:11 2022
+# Load=44/8192=1%, Rehash=0, Collisions=0/58=0%
+# Finished Make data base on Sun Apr 21 11:08:20 2024
 
  
