@@ -23,12 +23,12 @@ jobs:
           client_x509_cert_url: ${{ secrets.CLIENT_X509_CERT_URL }}
     - uses: azure/docker-login@v1
       with:
-        login-server: crpersonalprod001.azurecr.io
+        login-server: crpersonalapp.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t crpersonalprod001.azurecr.io/jerens-web-api:${{ github.sha }} -f docker/app-prod/Dockerfile
-        docker push crpersonalprod001.azurecr.io/jerens-web-api:${{ github.sha }}
+        docker build . -t crpersonalapp.azurecr.io/jerens-web-api:${{ github.sha }} -f docker/app-prod/Dockerfile
+        docker push crpersonalapp.azurecr.io/jerens-web-api:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
