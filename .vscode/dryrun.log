@@ -1,8 +1,8 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/jerensl/projects/api.jerenslensun.com'
+make: Entering directory '/home/jerensl/projects/api.jerensl.com'
 oapi-codegen -generate types -o internal/ports/openapi_types.gen.go -package ports api/openapi/notification.yml
 oapi-codegen -generate chi-server -o internal/ports/openapi.gen.go -package ports api/openapi/notification.yml
 oapi-codegen -generate types -o internal/tests/client/openapi_types.gen.go -package client api/openapi/notification.yml
 oapi-codegen -generate client -o internal/tests/client/openapi_client.gen.go -package client api/openapi/notification.yml
-make: Leaving directory '/home/jerensl/projects/api.jerenslensun.com'
+make: Leaving directory '/home/jerensl/projects/api.jerensl.com'
  
