@@ -8,6 +8,8 @@ import (
 	"github.com/jerensl/api.jerenslensun.com/internal/app"
 	"github.com/jerensl/api.jerenslensun.com/internal/app/command"
 	"github.com/jerensl/api.jerenslensun.com/internal/app/query"
+	"github.com/jerensl/api.jerenslensun.com/internal/metrics"
+	"github.com/sirupsen/logrus"
 )
 
 func NewApplication(ctx context.Context) app.Application {
@@ -26,10 +28,13 @@ func NewApplication(ctx context.Context) app.Application {
 		MessagingClient: messageClient,
 	}
 
+	logger := logrus.NewEntry(logrus.StandardLogger())
+	metricsClient := metrics.NoOp{}
+
 	return app.Application{
 		Commands: app.Commands{
-			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository),
-			Unsubscribe: command.NewUnsubscribe(tokenRepository),
+			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository, logger, metricsClient),
+			Unsubscribe: command.NewUnsubscribe(tokenRepository, logger, metricsClient),
 			SendNotification: command.NewSendNotificationHandler(&messaging),
 		},
 		Queries: app.Queries{

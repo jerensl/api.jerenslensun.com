@@ -7,11 +7,12 @@ import (
 
 	"github.com/go-chi/render"
 	"github.com/jerensl/api.jerenslensun.com/internal/app"
+	"github.com/jerensl/api.jerenslensun.com/internal/app/command"
 	"github.com/jerensl/api.jerenslensun.com/internal/logs/httperr"
 )
 
-//go:generate go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --config=../../api/openapi/types.cfg.yaml ../../api/openapi/notification.yaml
-//go:generate go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --config=../../api/openapi/server.cfg.yaml ../../api/openapi/notification.yaml
+//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config=../../api/openapi/types.cfg.yaml ../../api/openapi/notification.yaml
+//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config=../../api/openapi/server.cfg.yaml ../../api/openapi/notification.yaml
 
 type HttpServer struct {
 	app app.Application
@@ -30,19 +31,18 @@ func (h HttpServer) SubscribeNotification(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	token, err := h.app.Commands.AddNewSubscriber.Handle(r.Context(), newSubscriber.TokenID, newSubscriber.UpdatedAt)
+	cmd := command.AddNewSubscriber{
+		TokenID: newSubscriber.TokenID,
+		UpdateAt: newSubscriber.UpdatedAt,
+	}
+
+	err := h.app.Commands.AddNewSubscriber.Handle(r.Context(), cmd)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
-
-	status := Status{
-		IsActive: token.IsActive(),
-		UpdatedAt: token.UpdatedAt(),
-	}
 	
-	render.Status(r, http.StatusCreated)
-	render.Respond(w, r, status)
+	render.Status(r, http.StatusNoContent)
 }
 
 func (h HttpServer) SubscriberStatus(w http.ResponseWriter, r *http.Request) {
@@ -73,18 +73,18 @@ func (h HttpServer) UnsubscribeNotification(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	token, err := h.app.Commands.Unsubscribe.Handle(subscriber.TokenID, subscriber.UpdatedAt)
+	cmd := command.Unsubscribe{
+		TokenID: subscriber.TokenID,
+		UpdateAt: subscriber.UpdatedAt,
+	}
+
+	err := h.app.Commands.Unsubscribe.Handle(r.Context(), cmd)
 	if err != nil {
 		httperr.RespondWithSlugError(err, w, r)
 		return
 	}
 
-	status := Status{
-		IsActive: token.IsActive(),
-		UpdatedAt: token.UpdatedAt(),
-	}
-
-	render.Respond(w, r, status)
+	render.Status(r, http.StatusNoContent)
 }
 
 func (h HttpServer) SendNotification(w http.ResponseWriter, r *http.Request) {
