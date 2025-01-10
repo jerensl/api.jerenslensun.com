@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.18.2
+FROM golang:1.23.4
 
 RUN go install github.com/cespare/reflex@v0.3.1
 COPY reflex.conf /
