@@ -35,12 +35,12 @@ func NewApplication(ctx context.Context) app.Application {
 		Commands: app.Commands{
 			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository, logger, metricsClient),
 			Unsubscribe: command.NewUnsubscribe(tokenRepository, logger, metricsClient),
-			SendNotification: command.NewSendNotificationHandler(&messaging),
+			SendNotification: command.NewSendNotificationHandler(&messaging, logger, metricsClient),
 		},
 		Queries: app.Queries{
-			GetStatusSubscriber: query.NewGetStatusSubscriberHandler(tokenRepository),
-			GetAllSubscriber: query.NewGetAllSubscriberHandler(tokenRepository),
-			GetStatsSubscriber: query.NewGetStatsSubscriberHandler(tokenRepository),
+			StatusSubscriber: query.NewStatusSubscriberHandler(tokenRepository, logger, metricsClient),
+			AllSubscriber: query.NewAllSubscriberHandler(tokenRepository, logger, metricsClient),
+			StatsSubscriber: query.NewStatsSubscriberHandler(tokenRepository, logger, metricsClient),
 		},
 	}
 }

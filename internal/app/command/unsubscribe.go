@@ -10,8 +10,8 @@ import (
 )
 
 type Unsubscribe struct {
-	TokenID string
-	UpdateAt int64
+	TokenID		string
+	UpdateAt	int64
 }
 
 type UnsubscribeHandler decorator.CommandHandler[Unsubscribe]
