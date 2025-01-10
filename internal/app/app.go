@@ -17,7 +17,7 @@ type Commands struct {
 }
 
 type Queries struct {
-	GetStatusSubscriber query.GetStatusSubscriberHandler
-	GetAllSubscriber query.GetAllSubscriberHandler
-	GetStatsSubscriber query.GetStatsSubscriberHandler
+	StatusSubscriber query.StatusSubscriberHandler
+	AllSubscriber query.AllSubscriberHandler
+	StatsSubscriber query.StatsSubscriberHandler
 }

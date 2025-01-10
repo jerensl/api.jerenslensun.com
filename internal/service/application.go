@@ -8,6 +8,8 @@ import (
 	"github.com/jerensl/api.jerenslensun.com/internal/app"
 	"github.com/jerensl/api.jerenslensun.com/internal/app/command"
 	"github.com/jerensl/api.jerenslensun.com/internal/app/query"
+	"github.com/jerensl/api.jerenslensun.com/internal/metrics"
+	"github.com/sirupsen/logrus"
 )
 
 func NewApplication(ctx context.Context) app.Application {
@@ -26,16 +28,19 @@ func NewApplication(ctx context.Context) app.Application {
 		MessagingClient: messageClient,
 	}
 
+	logger := logrus.NewEntry(logrus.StandardLogger())
+	metricsClient := metrics.NoOp{}
+
 	return app.Application{
 		Commands: app.Commands{
-			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository),
-			Unsubscribe: command.NewUnsubscribe(tokenRepository),
-			SendNotification: command.NewSendNotificationHandler(&messaging),
+			AddNewSubscriber: command.NewAddNewSubscriberHandler(tokenRepository, logger, metricsClient),
+			Unsubscribe: command.NewUnsubscribe(tokenRepository, logger, metricsClient),
+			SendNotification: command.NewSendNotificationHandler(&messaging, logger, metricsClient),
 		},
 		Queries: app.Queries{
-			GetStatusSubscriber: query.NewGetStatusSubscriberHandler(tokenRepository),
-			GetAllSubscriber: query.NewGetAllSubscriberHandler(tokenRepository),
-			GetStatsSubscriber: query.NewGetStatsSubscriberHandler(tokenRepository),
+			StatusSubscriber: query.NewStatusSubscriberHandler(tokenRepository, logger, metricsClient),
+			AllSubscriber: query.NewAllSubscriberHandler(tokenRepository, logger, metricsClient),
+			StatsSubscriber: query.NewStatsSubscriberHandler(tokenRepository, logger, metricsClient),
 		},
 	}
 }

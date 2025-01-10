@@ -22,12 +22,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Subscriber'
       responses:
-        '201':
-          description: response subscribe from server
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
+        '204':
+          description: User have been subscribed successfulyy
         default:
           description: unexpected error
           content:
@@ -47,12 +43,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Subscriber'
       responses:
-        '200':
-          description: Response Unsubscribe from server
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Status'
+        '204':
+          description: User have been unsubscribed successfulyy
         default:
           description: unexpected error
           content:
@@ -117,8 +109,8 @@ paths:
             schema:
               $ref: '#/components/schemas/Message'
       responses:
-        '200':
-          description: todo
+        '204':
+          description: The notification have been send successfully
         default:
           description: unexpected error
           content:
