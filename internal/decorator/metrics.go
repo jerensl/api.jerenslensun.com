@@ -27,9 +27,9 @@ func (d commnadMetricsClient[C]) Handle(ctx context.Context, cmd C) (err error) 
 		d.client.Inc(fmt.Sprintf("command.%s.duration", actionName), int(end.Seconds()))
 
 		if err == nil {
-			d.client.Inc(fmt.Sprint("command.%s.success", actionName), 1)
+			d.client.Inc(fmt.Sprintf("command.%s.success", actionName), 1)
 		} else {
-			d.client.Inc(fmt.Sprint("command.%s.failure", actionName), 1)
+			d.client.Inc(fmt.Sprintf("command.%s.failure", actionName), 1)
 		}
 	}()
 	
