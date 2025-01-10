@@ -54,7 +54,7 @@ func (m *Messaging) SendNotification(ctx context.Context,token []string, title s
 		Tokens: token,
 	}
 
-	_, err := m.MessagingClient.SendMulticast(ctx, notification)
+	_, err := m.MessagingClient.SendEachForMulticast(ctx, notification)
 	if err != nil {
 		return errors.New("Unable to get send notification")
 	}
