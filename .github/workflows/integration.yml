@@ -50,10 +50,6 @@ jobs:
     - name: Inspect
       run: |
         docker buildx imagetools inspect localhost:5000/jerens-web-api/app:latest        
-    - name: Upload code coverage to Codecov
-      uses: codecov/codecov-action@v5
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   test:
     environment: test
     runs-on: ubuntu-latest
